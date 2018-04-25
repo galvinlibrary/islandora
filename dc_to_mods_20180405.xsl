@@ -19,7 +19,7 @@
         </mods>
         
   <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->
-        
+   <!-- this version removed non nested physicalDescription tags -->    
     </xsl:template>  
     <xsl:template name="dcMain">
         <xsl:apply-templates select="dcvalue[@element='title'][@qualifier='none']"/>

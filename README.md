@@ -1,2 +1,2 @@
 # islandora
-Galvin Library Islandora migation scripts
+Galvin Library Islandora migration scripts

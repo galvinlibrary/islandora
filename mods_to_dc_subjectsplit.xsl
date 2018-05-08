@@ -100,18 +100,17 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 					<xsl:call-template name="name"/>
 				</dc:creator>
 			</xsl:when>
+			<xsl:when test="mods:role/mods:roleTerm[@type='text']='Affiliated department'">
+				
+					<xsl:call-template name="departmentName"/>
+				
+			</xsl:when>
 			<xsl:otherwise>
 				<dc:contributor>
 					<xsl:call-template name="name"/>
 				</dc:contributor>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
-
-	<xsl:template match="mods:classification">
-		<dc:subject>
-			<xsl:value-of select="."/>
-		</dc:subject>
 	</xsl:template>
 
 	<xsl:template match="mods:subject[mods:topic | mods:name | mods:occupation | mods:geographic | mods:hierarchicalGeographic | mods:cartographics | mods:temporal] ">
@@ -125,13 +124,6 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 				<xsl:call-template name="name"/>
 				</dc:subject>
 			</xsl:for-each>
-		
-
-		<xsl:for-each select="mods:titleInfo/mods:title">
-			<dc:subject>
-				<xsl:value-of select="mods:titleInfo/mods:title"/>
-			</dc:subject>
-		</xsl:for-each>
 
 		<xsl:for-each select="mods:geographic">
 			<dc:coverage>
@@ -173,7 +165,13 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="mods:abstract | mods:tableOfContents | mods:note">
+	<xsl:template match="mods:abstract">
+		<dc:description>
+			<xsl:value-of select="."/>
+		</dc:description>
+	</xsl:template>
+	
+	<xsl:template match="mods:note[@type='track']">
 		<dc:description>
 			<xsl:value-of select="."/>
 		</dc:description>
@@ -336,33 +334,34 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 					<xsl:for-each
 						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
 							<dc:source><xsl:value-of select="."/></dc:source>
-					</xsl:for-each>
-				
+					</xsl:for-each>		
 			</xsl:when>
 			<xsl:when test="@type='series'"/>
 			<xsl:otherwise>
-
-					<xsl:for-each
-						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
+					<xsl:for-each select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
 						<xsl:if test="normalize-space(.)!= ''">
 							<dc:relation>
 							<xsl:value-of select="."/>
 							</dc:relation>
 						</xsl:if>
-					</xsl:for-each>
-				
+					</xsl:for-each>				
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
-
 
 	<xsl:template match="mods:accessCondition">
 		<dc:rights>
 			<xsl:value-of select="."/>
 		</dc:rights>
 	</xsl:template>
-
+	
+	
+	<xsl:template name="departmentName">
+		<dc:source>
+			<xsl:value-of select="mods:namePart"/>
+		</dc:source>
+	</xsl:template>
+	
 	<xsl:template name="name">
 		<xsl:variable name="name">
 			<xsl:for-each select="mods:namePart[not(@type)]">

@@ -19,7 +19,7 @@
         </mods>
         
   <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->
-   <!-- this version removed non nested physicalDescription tags -->    
+  <!-- this version removed non nested physicalDescription tags -->    
     </xsl:template>  
     <xsl:template name="dcMain">
         <xsl:apply-templates select="dcvalue[@element='title'][@qualifier='none']"/>
@@ -85,8 +85,7 @@
             </role>
             <namePart>
                 <xsl:apply-templates/>
-            </namePart>
-            
+            </namePart>           
         </name>
     </xsl:template>
     
@@ -99,8 +98,7 @@
             </role>
             <namePart>
                 <xsl:apply-templates/>
-            </namePart>
-            
+            </namePart>          
         </name>
     </xsl:template>
     <xsl:template match="dcvalue[@element='contributor'][@qualifier='editor']">
@@ -112,8 +110,7 @@
             </role>
             <namePart>
                 <xsl:apply-templates/>
-            </namePart>
-            
+            </namePart>           
         </name>
     </xsl:template>
     <xsl:template match="dcvalue[@element='contributor'][@qualifier='other']">
@@ -173,12 +170,12 @@
     </xsl:template>
     <xsl:template match="dcvalue[@element='description'][@qualifier='abstract']">
         <abstract>
-            <xsl:apply-templates/>           
+            <xsl:value-of select="normalize-space(.)" />          
         </abstract>
     </xsl:template>
     <xsl:template match="dcvalue[@element='description'][@qualifier='none']">
         <note>
-            <xsl:apply-templates/>
+            <xsl:value-of select="normalize-space(.)" />
         </note>
     </xsl:template>
     <xsl:template match="dcvalue[@element='description'][@qualifier='provenance']">
@@ -187,9 +184,16 @@
         </note>
     </xsl:template>
     <xsl:template match="dcvalue[@element='description'][@qualifier='sponsorship']">
-        <note type="sponsorship">
-            <xsl:apply-templates/>
-        </note>
+        <name>
+            <role>
+                <roleTerm type="text">
+                    <xsl:text>sponsor</xsl:text>
+                </roleTerm>
+            </role>
+            <namePart>
+                <xsl:apply-templates/>
+            </namePart>
+        </name>
     </xsl:template>
     <xsl:template match="dcvalue[@element='embargo'][@qualifier='term']">
         <note type="embargo">
@@ -332,13 +336,12 @@
             <xsl:apply-templates/>
         </identifier>
     </xsl:template>
-                    
-                    
-  
+                     
     <xsl:template match="dcvalue[@element='language']">
+        <xsl:variable name="langcode" select="current()" />
         <language>
-            <languageTerm authority="rfc3066">
-                <xsl:apply-templates/>
+            <languageTerm type="code" authority="rfc3066">            
+                <xsl:value-of select="substring($langcode/text(),1,2)"/>               
             </languageTerm>
         </language>
     </xsl:template>
@@ -375,14 +378,11 @@
         </relatedItem>
     </xsl:template>    
     
- 
     <xsl:template match="dcvalue[@element='subject']">
-        <subject>
-            
+        <subject>          
                 <xsl:call-template name="tokenize">
                     <xsl:with-param name="text" select="."/>
-                </xsl:call-template>
-            
+                </xsl:call-template>           
         </subject>
     </xsl:template>
     
@@ -411,7 +411,9 @@
     
     <xsl:template match="dcvalue[@element='type']">
         <!--2.0: Variable test for any dc:type with value of collection for mods:typeOfResource -->
-        <!-- Replaces DCMI value with MODS, and creates genre element with DCMI value  -->
+        <!-- Transforms DC type value to MODS typeOfResource controlled vocabulary value-->
+        <!-- And and creates new genre element with original DC type value-->
+        <!---Islandora SOLR index on genre value--> 
         <xsl:variable name="collection">
             <xsl:if test="../dc:dcvalue[@element='type'][string(text()) = 'collection' or string(text()) = 'Collection']">true</xsl:if>
         </xsl:variable>
@@ -422,7 +424,7 @@
                 </genre>
             </xsl:when>
             <xsl:otherwise>
-                <!-- based on DCMI Type Vocabulary at http://dublincore.org/documents/dcmi-type-vocabulary/ -->
+                <!-- dc.type to mods.typeOfResource is based on LOC Dublin Core Metadata Element Set Mapping to MODS Version 3 mapping at  -->
                 <xsl:choose>
                     <xsl:when test="string(text()) = 'Dataset' or string(text()) = 'dataset'">
                         <typeOfResource>
@@ -433,8 +435,8 @@
                             </xsl:if>	
                             <xsl:text>software, multimedia</xsl:text>
                         </typeOfResource>
-                        <genre authority="lcgft" authorityURI="gf2014026186">
-                            <xsl:text>tables (data)</xsl:text>
+                        <genre authority="coar" authorityURI="c_ddb1">
+                            <xsl:text>dataset</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Article' or string(text()) = 'article'">
@@ -489,6 +491,19 @@
                             <xsl:value-of select="."/>
                         </genre>
                     </xsl:when>
+                    <xsl:when test="string(text()) = 'Dissertation' or string(text()) = 'dissertation'">
+                        <typeOfResource>
+                            <xsl:if test="$collection='true'">
+                                <xsl:attribute name="collection">
+                                    <xsl:text>yes</xsl:text>
+                                </xsl:attribute>
+                            </xsl:if>	
+                            <xsl:text>text</xsl:text>
+                        </typeOfResource>
+                        <genre authority="coar" authorityURI="c_db06">
+                            <xsl:text>doctoral thesis</xsl:text>
+                        </genre>
+                    </xsl:when>
                     <xsl:when test="string(text()) = 'Image' or string(text()) = 'image'">
                         <typeOfResource>
                             <xsl:if test="$collection='true'">
@@ -498,6 +513,9 @@
                             </xsl:if>
                             <xsl:text>still image</xsl:text>
                         </typeOfResource>
+                        <genre authority="coar" authorityURI="c_db06">
+                            <xsl:text>still image</xsl:text>
+                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
                         <typeOfResource>
@@ -508,7 +526,7 @@
                             </xsl:if>
                             <xsl:text>software, multimedia</xsl:text>
                         </typeOfResource>
-                        <genre authority="aat" authorityURI="300028566">
+                        <genre authority="coar" authorityURI="c_5ce6">
                             <xsl:text>software</xsl:text>
                         </genre>
                     </xsl:when>
@@ -538,7 +556,7 @@
                             <xsl:text>object</xsl:text>
                         </genre>
                     </xsl:when>
-                    <xsl:when test="string(text()) = 'Masters Project' or string(text()) = 'masters project'">
+                    <xsl:when test="string(text()) = 'Master&amp;apos;s Project' or string(text()) = 'master&amp;apos;s project'">
                         <typeOfResource>
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
@@ -623,7 +641,7 @@
                             <xsl:text>text</xsl:text>
                         </typeOfResource>
                     </xsl:when>
-                    <xsl:when test="string(text()) = 'Poster' or string(text()) = 'poster'">
+                    <xsl:when test="string(text()) = 'Thesis' or string(text()) = 'thesis'">
                         <typeOfResource>
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
@@ -631,6 +649,19 @@
                                 </xsl:attribute>
                             </xsl:if>
                             <xsl:text>text</xsl:text>
+                        </typeOfResource>
+                        <genre authority="coar" authorityURI="c_46ec">
+                            <xsl:text>thesis</xsl:text>
+                        </genre>
+                    </xsl:when>
+                    <xsl:when test="string(text()) = 'Poster' or string(text()) = 'poster'">
+                        <typeOfResource>
+                            <xsl:if test="$collection='true'">
+                                <xsl:attribute name="collection">
+                                    <xsl:text>yes</xsl:text>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:text>mixed material</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" authorityURI="tgm008104">
                             <xsl:text>poster</xsl:text>
@@ -656,7 +687,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>mixed material</xsl:text>
                         </typeOfResource> 
                         <genre>
                             <xsl:value-of select="."/>
@@ -747,13 +778,7 @@
             <xsl:apply-templates/>
         </relatedItem>
     </xsl:template>
-    <xsl:template match="dcvalue[@elements='language']">
-        <language>
-            <languageTerm authority="rfc3066">
-                <xsl:apply-templates/>
-            </languageTerm>
-        </language>
-    </xsl:template>
+    
    
     <xsl:template match="dcterms[@elements='rights'][@qualifier='none']">
         <accessCondition type="useAndReproduction">

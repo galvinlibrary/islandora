@@ -15,13 +15,24 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
             xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"> 
             <xsl:copy-of select="*" copy-namespaces="no"/>
+            <xsl:for-each select="document('metadata_iit.xml')/dublin_core/dcvalue[@element='type']">
+                <genre>
+                    <xsl:apply-templates/>
+                </genre>
+            </xsl:for-each>
+            <xsl:for-each select="document('metadata_iit.xml')/dublin_core/dcvalue[@element='ipro']">
+                <note type="track">
+                    <xsl:text>IPRO track: </xsl:text>
+                    <xsl:apply-templates/>
+                </note>
+            </xsl:for-each> 
             <name type="corporate">               
-                <namePart><xsl:value-of select="document('metadata_iit.xml')/dublin_core/dcvalue"/></namePart>
+                <namePart><xsl:value-of select="document('metadata_iit.xml')/dublin_core/dcvalue[@element='department']"/></namePart>
                 <affiliation>Illinois Institute of Technology</affiliation>
                 <role>
                     <roleTerm type="text">Affiliated department</roleTerm>
                 </role>
-            </name>
+            </name>                  
         </mods>
     </xsl:template>
 </xsl:stylesheet>

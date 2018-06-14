@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mods="http://www.loc.gov/mods/v3" exclude-result-prefixes="mods"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -72,24 +71,15 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	</xsl:template>
 	
 	<xsl:template match="mods:titleInfo">
-		<dc:title>
-			<xsl:value-of select="mods:nonSort"/>
-			<xsl:if test="mods:nonSort">
-				<xsl:text> </xsl:text>
-			</xsl:if>
-			<xsl:value-of select="mods:title"/>
-			<xsl:if test="mods:subTitle">
-				<xsl:text>: </xsl:text>
-				<xsl:value-of select="mods:subTitle"/>
-			</xsl:if>
-			<xsl:if test="mods:partNumber">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partNumber"/>
-			</xsl:if>
-			<xsl:if test="mods:partName">
-				<xsl:text>. </xsl:text>
-				<xsl:value-of select="mods:partName"/>
-			</xsl:if>
+		<dc:title>			
+			<xsl:value-of select="mods:title"/>			
+		</dc:title>
+		
+	</xsl:template>
+	
+	<xsl:template match="mods:titleInfo/mods:title[@type='alternative']">
+		<dc:title >
+			<xsl:value-of select="."/>
 		</dc:title>
 	</xsl:template>
 
@@ -100,17 +90,29 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 					<xsl:call-template name="name"/>
 				</dc:creator>
 			</xsl:when>
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='Affiliated department'">
-				
-					<xsl:call-template name="departmentName"/>
-				
-			</xsl:when>
+			<xsl:when test="mods:role/mods:roleTerm[@type='text']='contributor' or 'advisor'">
+				<dc:contributor>
+					<xsl:call-template name="name"/>
+				</dc:contributor>
+			</xsl:when>			
 			<xsl:otherwise>
 				<dc:contributor>
 					<xsl:call-template name="name"/>
 				</dc:contributor>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="mods:name[@type='corporate']/mods:namePart">
+		<dc:source>
+			<xsl:value-of select="."/>
+		</dc:source>
+	</xsl:template>
+	
+	<xsl:template match="mods:name[@type='corporate']/mods:affiliation">
+		<dc:source>
+			<xsl:value-of select="."/>
+		</dc:source>
 	</xsl:template>
 
 	<xsl:template match="mods:subject[mods:topic | mods:name | mods:occupation | mods:geographic | mods:hierarchicalGeographic | mods:cartographics | mods:temporal] ">
@@ -126,7 +128,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 			</xsl:for-each>
 
 		<xsl:for-each select="mods:geographic">
-			<dc:coverage>
+			<dc:coverage >
 				<xsl:value-of select="."/>
 			</dc:coverage>
 		</xsl:for-each>
@@ -145,33 +147,9 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 				<xsl:value-of select="."/>
 			</dc:coverage>
 		</xsl:for-each>
-
-		<xsl:if test="mods:temporal">
-			<dc:coverage>
-				<xsl:for-each select="mods:temporal">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">-</xsl:if>
-				</xsl:for-each>
-			</dc:coverage>
-		</xsl:if>
-
-		<xsl:if test="*[1][local-name()='topic'] and *[local-name()!='topic']">
-			<dc:subject>
-				<xsl:for-each select="*[local-name()!='cartographics' and local-name()!='geographicCode' and local-name()!='hierarchicalGeographic'] ">
-					<xsl:value-of select="."/>
-					<xsl:if test="position()!=last()">--</xsl:if>
-				</xsl:for-each>
-			</dc:subject>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="mods:abstract">
-		<dc:description>
-			<xsl:value-of select="."/>
-		</dc:description>
 	</xsl:template>
 	
-	<xsl:template match="mods:note[@type='track']">
+	<xsl:template match="mods:abstract | mods:tableOfContents | mods:note">
 		<dc:description>
 			<xsl:value-of select="."/>
 		</dc:description>
@@ -210,7 +188,21 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 				</xsl:otherwise>
 			</xsl:choose>
 		</dc:date>
+	</xsl:template> 
+	
+	<xsl:template match="mods:dateIssued">
+		<dc:date>
+			<xsl:value-of select="."/>
+		</dc:date>
 	</xsl:template>
+	
+	<xsl:template match="mods:dateCreated">
+		<dc:date>
+			<xsl:value-of select="."/>
+		</dc:date>
+	</xsl:template>
+	
+	
 	
 	<xsl:template match="mods:dateIssued[@point='start'] | mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
 		<xsl:variable name="dateName" select="local-name()"/>
@@ -219,70 +211,62 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 		</dc:date>
 	</xsl:template>
 	
-	<xsl:template match="mods:temporal[@point='start']  ">
-		<xsl:value-of select="."/>-<xsl:value-of select="../mods:temporal[@point='end']"/>
-	</xsl:template>
 	
-	<xsl:template match="mods:temporal[@point!='start' and @point!='end']  ">
-		<xsl:value-of select="."/>
-	</xsl:template>
 	<xsl:template match="mods:genre">
-		<xsl:choose>
-			<xsl:when test="@authority='dct'">
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-			</xsl:when>
-			<xsl:otherwise>
 				<dc:type>
 					<xsl:value-of select="."/>
 				</dc:type>
 				<xsl:apply-templates select="mods:typeOfResource"/>
-			</xsl:otherwise>
-		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="mods:typeOfResource">
 		<xsl:if test="@collection='yes'">
-			<dc:type>Collection</dc:type>
+			<dc:type>collection</dc:type>
 		</xsl:if>
-		<xsl:if test=". ='software' and ../mods:genre='database'">
-			<dc:type>Dataset</dc:type>
+		<xsl:if test=". ='software' or 'Software' and ../mods:genre='database'">
+			<dc:type>dataset</dc:type>
 		</xsl:if>
-		<xsl:if test=".='software' and ../mods:genre='online system or service'">
-			<dc:type>Service</dc:type>
+		<xsl:if test=".='software' or 'Software' and ../mods:genre='online system or service'">
+			<dc:type>service</dc:type>
 		</xsl:if>
-		<xsl:if test=".='software'">
-			<dc:type>Software</dc:type>
+		<xsl:if test=".='software' or 'Software'">
+			<dc:type>software</dc:type>
 		</xsl:if>
-		<xsl:if test=".='cartographic material'">
-			<dc:type>Image</dc:type>
+		<xsl:if test=".='cartographic material' or 'Cartographic material'">
+			<dc:type>image</dc:type>
 		</xsl:if>
-		<xsl:if test=".='multimedia'">
-			<dc:type>InteractiveResource</dc:type>
+		<xsl:if test=".='multimedia' or 'Multimedia'">
+			<dc:type>interactive resource</dc:type>
 		</xsl:if>
-		<xsl:if test=".='moving image'">
-			<dc:type>MovingImage</dc:type>
+		<xsl:if test=".='moving image' or 'Moving image'">
+			<dc:type>moving image</dc:type>
 		</xsl:if>
-		<xsl:if test=".='three dimensional object'">
-			<dc:type>PhysicalObject</dc:type>
+		<xsl:if test=".='three dimensional object' or 'Three dimensional object'">
+			<dc:type>physical object</dc:type>
 		</xsl:if>
-		<xsl:if test="starts-with(.,'sound recording')">
-			<dc:type>Sound</dc:type>
+		<xsl:if test="starts-with(.,'sound recording' or 'Sound recording')">
+			<dc:type>sound</dc:type>
 		</xsl:if>
-		<xsl:if test=".='still image'">
-			<dc:type>StillImage</dc:type>
+		<xsl:if test=".='still image' or 'Still image'">
+			<dc:type>still image</dc:type>
 		</xsl:if>
-		<xsl:if test=". ='text'">
+		<xsl:if test=". ='text' or 'Text'">
 			<dc:type>Text</dc:type>
 		</xsl:if>
-		<xsl:if test=".='notated music'">
+		<xsl:if test=".='notated music' or 'Notated music'">
 			<dc:type>Text</dc:type>
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template match="mods:physicalDescription/mods:form">
+		<dc:format>
+			<xsl:value-of select="."/>
+		</dc:format>		
+	</xsl:template>
+	
+	
 	<xsl:template match="mods:physicalDescription">
-		<xsl:for-each select="mods:extent | mods:form | mods:internetMediaType">
+		<xsl:for-each select="mods:extent | mods:internetMediaType">
 			<dc:format>
 				<xsl:value-of select="."/>
 			</dc:format>
@@ -298,26 +282,26 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	<xsl:template match="mods:identifier">
 		<dc:identifier>
 			<xsl:variable name="type" select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
-			<xsl:choose>
+				<xsl:choose>
 				<!-- GM: removed identifier type attribute from output for non-ISBN identifiers-->
-				<xsl:when test="contains(.,':')">
-					<xsl:value-of select="."/>
-				</xsl:when>
-				<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
-					<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
-				</xsl:when>
-				<xsl:otherwise>
+					<xsl:when test="contains(.,':')">
 						<xsl:value-of select="."/>
-				</xsl:otherwise>
-			</xsl:choose>
+					</xsl:when>
+					<xsl:when test="contains ('isbn issn uri doi lccn uri', $type)">
+						<xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="."/>
+					</xsl:otherwise>
+				</xsl:choose>
 		</dc:identifier>
 	</xsl:template>
 
-	<xsl:template match="mods:location">
+	<xsl:template match="mods:relatedItem/mods:location">
 		<xsl:for-each select="mods:url">
-			<dc:identifier>	
+			<dc:relation>	
 				<xsl:value-of select="."/>
-			</dc:identifier>
+			</dc:relation>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -328,40 +312,39 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	</xsl:template>
 
 <!-- GM: removed coordination between subfields -->
-	<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
-		<xsl:choose>
-			<xsl:when test="@type='original'">
+		
+		
+		<xsl:template match="mods:relatedItem[mods:titleInfo | mods:name | mods:identifier | mods:location]">
+			<xsl:choose>
+				<xsl:when test="@type='host'">
 					<xsl:for-each
 						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
 							<dc:source><xsl:value-of select="."/></dc:source>
-					</xsl:for-each>		
-			</xsl:when>
-			<xsl:when test="@type='series'"/>
-			<xsl:otherwise>
-					<xsl:for-each select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
+					</xsl:for-each>
+				
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:for-each
+						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
 						<xsl:if test="normalize-space(.)!= ''">
 							<dc:relation>
 							<xsl:value-of select="."/>
 							</dc:relation>
 						</xsl:if>
-					</xsl:for-each>				
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
+					</xsl:for-each>
+				
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:template>
+	
+
 
 	<xsl:template match="mods:accessCondition">
 		<dc:rights>
 			<xsl:value-of select="."/>
 		</dc:rights>
 	</xsl:template>
-	
-	
-	<xsl:template name="departmentName">
-		<dc:source>
-			<xsl:value-of select="mods:namePart"/>
-		</dc:source>
-	</xsl:template>
-	
+
 	<xsl:template name="name">
 		<xsl:variable name="name">
 			<xsl:for-each select="mods:namePart[not(@type)]">
@@ -387,7 +370,6 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	</xsl:template>
 
 	<!-- suppress all else:-->
-	<xsl:template match="*"/>
-		
-	
+	<xsl:template match="*"/>		
+
 </xsl:stylesheet>

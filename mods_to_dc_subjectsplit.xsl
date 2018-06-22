@@ -73,8 +73,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	<xsl:template match="mods:titleInfo">
 		<dc:title>			
 			<xsl:value-of select="mods:title"/>			
-		</dc:title>
-		
+		</dc:title>	
 	</xsl:template>
 	
 	<xsl:template match="mods:titleInfo/mods:title[@type='alternative']">
@@ -83,37 +82,31 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 		</dc:title>
 	</xsl:template>
 
+	<xsl:template match="mods:name[@type='corporate']">
+		<dc:source>
+			<xsl:value-of select="mods:namePart"/>
+		</dc:source>
+		<dc:source>
+			<xsl:value-of select="mods:affiliation"/>
+		</dc:source>
+	</xsl:template>
+	
+	
 	<xsl:template match="mods:name">
 		<xsl:choose>
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='creator' or mods:role/mods:roleTerm[@type='code']='cre' ">
+			<xsl:when test="mods:role/mods:roleTerm= 'creator'">
 				<dc:creator>
-					<xsl:call-template name="name"/>
+					<xsl:value-of select="mods:namePart"/>
 				</dc:creator>
 			</xsl:when>
-			<xsl:when test="mods:role/mods:roleTerm[@type='text']='contributor' or 'advisor'">
+			<xsl:when test="mods:role/mods:roleTerm = 'contributor' or 'advisor' or 'editor' or 'other'">
 				<dc:contributor>
-					<xsl:call-template name="name"/>
+					<xsl:value-of select="mods:namePart"/>
 				</dc:contributor>
-			</xsl:when>			
-			<xsl:otherwise>
-				<dc:contributor>
-					<xsl:call-template name="name"/>
-				</dc:contributor>
-			</xsl:otherwise>
+			</xsl:when>
 		</xsl:choose>
 	</xsl:template>
 	
-	<xsl:template match="mods:name[@type='corporate']/mods:namePart">
-		<dc:source>
-			<xsl:value-of select="."/>
-		</dc:source>
-	</xsl:template>
-	
-	<xsl:template match="mods:name[@type='corporate']/mods:affiliation">
-		<dc:source>
-			<xsl:value-of select="."/>
-		</dc:source>
-	</xsl:template>
 
 	<xsl:template match="mods:subject[mods:topic | mods:name | mods:occupation | mods:geographic | mods:hierarchicalGeographic | mods:cartographics | mods:temporal] ">
 			<xsl:for-each select="mods:topic">
@@ -123,7 +116,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 			</xsl:for-each>
 			<xsl:for-each select="mods:name">
 				<dc:subject>
-				<xsl:call-template name="name"/>
+					<xsl:value-of select="."/>
 				</dc:subject>
 			</xsl:for-each>
 
@@ -216,57 +209,63 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 				<dc:type>
 					<xsl:value-of select="."/>
 				</dc:type>
-				<xsl:apply-templates select="mods:typeOfResource"/>
+<!--				<xsl:apply-templates select="mods:typeOfResource"/>  -->
 	</xsl:template>
 
-	<xsl:template match="mods:typeOfResource">
-		<xsl:if test="@collection='yes'">
-			<dc:type>collection</dc:type>
-		</xsl:if>
-		<xsl:if test=". ='software' or 'Software' and ../mods:genre='database'">
-			<dc:type>dataset</dc:type>
-		</xsl:if>
-		<xsl:if test=".='software' or 'Software' and ../mods:genre='online system or service'">
-			<dc:type>service</dc:type>
-		</xsl:if>
-		<xsl:if test=".='software' or 'Software'">
-			<dc:type>software</dc:type>
-		</xsl:if>
-		<xsl:if test=".='cartographic material' or 'Cartographic material'">
-			<dc:type>image</dc:type>
-		</xsl:if>
-		<xsl:if test=".='multimedia' or 'Multimedia'">
-			<dc:type>interactive resource</dc:type>
-		</xsl:if>
-		<xsl:if test=".='moving image' or 'Moving image'">
-			<dc:type>moving image</dc:type>
-		</xsl:if>
-		<xsl:if test=".='three dimensional object' or 'Three dimensional object'">
-			<dc:type>physical object</dc:type>
-		</xsl:if>
-		<xsl:if test="starts-with(.,'sound recording' or 'Sound recording')">
-			<dc:type>sound</dc:type>
-		</xsl:if>
-		<xsl:if test=".='still image' or 'Still image'">
-			<dc:type>still image</dc:type>
-		</xsl:if>
-		<xsl:if test=". ='text' or 'Text'">
-			<dc:type>Text</dc:type>
-		</xsl:if>
-		<xsl:if test=".='notated music' or 'Notated music'">
-			<dc:type>Text</dc:type>
-		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="mods:physicalDescription/mods:form">
-		<dc:format>
-			<xsl:value-of select="."/>
-		</dc:format>		
+	<xsl:template match="mods:typeOfResource">	
+		<xsl:choose>
+			<xsl:when test="contains(text(), 'Collection') or contains(text(), 'collection')">
+				<dc:type>collection</dc:type>
+			</xsl:when>		
+			<xsl:otherwise>
+				<!-- dc.type to mods.typeOfResource is based on LOC Dublin Core Metadata Element Set Mapping to MODS Version 3 mapping at  -->
+				<xsl:choose>
+					<xsl:when test="string(text()) = 'Dataset' or string(text()) = 'dataset'">
+						<dc:type>Dataset</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
+						<dc:type>Service</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
+						<dc:type>Software</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'cartographic material' or string(text()) = 'Cartographic material'">
+						<dc:type>Image</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'multimedia' or string(text()) = 'Multimedia'">
+						<dc:type>Interactive resource</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'moving image' or string(text()) = 'Moving image'">
+						<dc:type>Moving image</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'three dimensional object' or string(text()) = 'Three dimensional object'">
+						<dc:type>Physical object</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'still image' or string(text()) = 'Still image'">
+						<dc:type>Still image</dc:type>
+					</xsl:when>
+					<xsl:when test="starts-with(.,'sound recording' or string(text()) = 'Sound recording')">
+						<dc:type>Sound</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'text' or string(text()) = 'Text'">
+						<dc:type>Text</dc:type>
+					</xsl:when>
+					<xsl:when test="string(text()) = 'notated music' or string(text()) = 'Notated music'">
+						<dc:type>Text</dc:type>
+					</xsl:when>
+					<xsl:otherwise>
+						<dc:type>
+							<xsl:value-of select="."/>
+						</dc:type>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:otherwise>			
+		</xsl:choose>
 	</xsl:template>
 	
 	
 	<xsl:template match="mods:physicalDescription">
-		<xsl:for-each select="mods:extent | mods:internetMediaType">
+		<xsl:for-each select="mods:extent | mods:internetMediaType | mods:form">
 			<dc:format>
 				<xsl:value-of select="."/>
 			</dc:format>
@@ -318,14 +317,14 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 			<xsl:choose>
 				<xsl:when test="@type='host'">
 					<xsl:for-each
-						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
+						select="mods:titleInfo[mods:title | mods:identifier | mods:location/mods:url]">
 							<dc:source><xsl:value-of select="."/></dc:source>
 					</xsl:for-each>
 				
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:for-each
-						select="mods:titleInfo/mods:title | mods:identifier | mods:location/mods:url">
+						select="mods:titleInfo[mods:title | mods:identifier | mods:location/mods:url]">
 						<xsl:if test="normalize-space(.)!= ''">
 							<dc:relation>
 							<xsl:value-of select="."/>
@@ -345,7 +344,8 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 		</dc:rights>
 	</xsl:template>
 
-	<xsl:template name="name">
+<!--  Not using name template because not parsing names into subelements for now 
+		<xsl:template name="name">
 		<xsl:variable name="name">
 			<xsl:for-each select="mods:namePart[not(@type)]">
 				<xsl:value-of select="."/>
@@ -367,7 +367,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 			</xsl:if>
 		</xsl:variable>
 		<xsl:value-of select="normalize-space($name)"/>
-	</xsl:template>
+	</xsl:template>   -->
 
 	<!-- suppress all else:-->
 	<xsl:template match="*"/>		

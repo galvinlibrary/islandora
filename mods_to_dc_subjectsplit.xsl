@@ -221,37 +221,37 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 				<!-- dc.type to mods.typeOfResource is based on LOC Dublin Core Metadata Element Set Mapping to MODS Version 3 mapping at  -->
 				<xsl:choose>
 					<xsl:when test="string(text()) = 'Dataset' or string(text()) = 'dataset'">
-						<dc:type>Dataset</dc:type>
+						<dc:type>dataset</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
-						<dc:type>Service</dc:type>
+						<dc:type>service</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
-						<dc:type>Software</dc:type>
+						<dc:type>software</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'cartographic material' or string(text()) = 'Cartographic material'">
-						<dc:type>Image</dc:type>
+						<dc:type>image</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'multimedia' or string(text()) = 'Multimedia'">
-						<dc:type>Interactive resource</dc:type>
+						<dc:type>interactive resource</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'moving image' or string(text()) = 'Moving image'">
-						<dc:type>Moving image</dc:type>
+						<dc:type>moving image</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'three dimensional object' or string(text()) = 'Three dimensional object'">
-						<dc:type>Physical object</dc:type>
+						<dc:type>physical object</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'still image' or string(text()) = 'Still image'">
-						<dc:type>Still image</dc:type>
+						<dc:type>still image</dc:type>
 					</xsl:when>
 					<xsl:when test="starts-with(.,'sound recording' or string(text()) = 'Sound recording')">
-						<dc:type>Sound</dc:type>
+						<dc:type>sound</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'text' or string(text()) = 'Text'">
-						<dc:type>Text</dc:type>
+						<dc:type>text</dc:type>
 					</xsl:when>
 					<xsl:when test="string(text()) = 'notated music' or string(text()) = 'Notated music'">
-						<dc:type>Text</dc:type>
+						<dc:type>text</dc:type>
 					</xsl:when>
 					<xsl:otherwise>
 						<dc:type>

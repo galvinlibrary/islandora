@@ -142,7 +142,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 		</xsl:for-each>
 	</xsl:template>
 	
-	<xsl:template match="mods:abstract | mods:tableOfContents | mods:note">
+	<xsl:template match="mods:abstract">
 		<dc:description>
 			<xsl:value-of select="."/>
 		</dc:description>

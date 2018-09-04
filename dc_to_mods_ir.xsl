@@ -9,7 +9,7 @@
     
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
-   
+  
    
     <xsl:template match="dublin_core">
         <mods version="3.4" xmlns="http://www.loc.gov/mods/v3" 
@@ -39,8 +39,7 @@
         <xsl:apply-templates select="dcvalue[@element='description'][@qualifier='provenance']"/>
         <xsl:apply-templates select="dcvalue[@element='description'][@qualifier='sponsorship']"/>
         <xsl:apply-templates select="dcvalue[@element='description'][@qualifier='none']"/>       
-        <xsl:apply-templates select="dcvalue[@element='date'][@qualifier='none']"/>
-        
+        <xsl:apply-templates select="dcvalue[@element='date'][@qualifier='none']"/>       
         <xsl:apply-templates select="dcvalue[@element='date'][@qualifier='copyright']"/>
         <xsl:apply-templates select="dcvalue[@element='date'][@qualifier='issued']"/>
         <xsl:apply-templates select="dcvalue[@element='embargo'][@qualifier='terms']"/>
@@ -96,9 +95,10 @@
                 <xsl:apply-templates/>
             </namePart>           
         </name>
-    </xsl:template>
+    </xsl:template> 
     
-    <xsl:template match="dcvalue[@element='contributor'][@qualifier='author']">
+    <!-- Keep first letter of each word in the name capitalized, lower case the rest -->
+    <xsl:template match="dcvalue[@element='contributor'][@qualifier='author']">   
         <name>
             <role>
                 <roleTerm type="text" authority="marcrelator" authorityURI="http://id.loc.gov/vocabulary/relators" valueURI="http://id.loc.gov/vocabulary/relators/cre">
@@ -106,10 +106,34 @@
                 </roleTerm>
             </role>
             <namePart>
-                <xsl:apply-templates/>
+                    <xsl:call-template name="capitalize">
+                        <xsl:with-param name="text" select="." />
+                    </xsl:call-template>	                  
             </namePart>          
         </name>
     </xsl:template>
+
+    <xsl:template name="capitalize">
+        <xsl:param name="text"/>
+        <xsl:param name="delimiter" select="' '"/>
+        
+        <xsl:variable name="upper-case" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+        <xsl:variable name="lower-case" select="'abcdefghijklmnopqrstuvwxyz'"/>
+        
+        <xsl:variable name="word" select="substring-before(concat($text, $delimiter), $delimiter)" />
+        <xsl:if test="$word">
+            <xsl:value-of select="translate(substring($word, 1, 1), $lower-case, $upper-case)"/>    
+            <xsl:value-of select="translate(substring($word, 2), $upper-case, $lower-case)"/>
+        </xsl:if>
+        <xsl:if test="contains($text, $delimiter)">
+            <xsl:value-of select="$delimiter"/>
+            <!-- recursive call -->
+            <xsl:call-template name="capitalize">
+                <xsl:with-param name="text" select="substring-after($text, $delimiter)"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
     <xsl:template match="dcvalue[@element='contributor'][@qualifier='editor']">
         <name>
             <role>

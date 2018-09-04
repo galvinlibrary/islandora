@@ -1,4 +1,4 @@
-# islandora
+# Islandora
 Galvin Library Islandora migration scripts
 
 dc_to_mods (both versions) and mods_iitmetadata_combine for preprocessing batch ingests of files migrating from DSpace.

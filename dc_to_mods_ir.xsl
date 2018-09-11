@@ -449,13 +449,12 @@
         </originInfo>
     </xsl:template>
     <xsl:template match="dcvalue[@element='relation']">
-        <!--If begins with "http://"-->
+        <!--Most values in this DSpace elements are DOIs of other versions. Also some repeated patent numbers. Not all web links.
+        Changed from relatedItem/location/url on 2018-09-11 -->
         <relatedItem>
-            <location>
-                <url>
+            <identifier type="otherFormat">
                     <xsl:apply-templates/>
-                </url>
-            </location>
+            </identifier>
         </relatedItem>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='none']">

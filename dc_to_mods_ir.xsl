@@ -44,14 +44,13 @@
         <xsl:apply-templates select="dcvalue[@element='date'][@qualifier='issued']"/>
         <xsl:apply-templates select="dcvalue[@element='embargo'][@qualifier='terms']"/>
         <xsl:apply-templates select="dcvalue[@element='format'][@qualifier='original']"/>
-        <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='govdoc']"/>
-        <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='ipc']"/>
         <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='isbn']"/>
-        <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='ismn']"/>
+        <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='issn']"/>
         <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='pn']"/>
         <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='uri']"/>
         <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='other']"/>
         <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='none']"/>
+        <xsl:apply-templates select="dcvalue[@element='identifier'][@qualifier='citation']"/>
         <xsl:apply-templates select="dcvalue[@element='language'][@qualifier='iso']"/>
         <xsl:apply-templates select="dcvalue[@element='publisher']"/>
         <xsl:apply-templates select="dcvalue[@element='relation'][@qualifier='hasversion']"/>
@@ -269,6 +268,8 @@
         
   
     <!--Related item: For migrated records: if relation element exists, it is either another version published elsewhere on internet, or is part of a series (patents) --> 
+   <!-- UPDATED: Commented out 9/2018. All related items from DSpace go into relatedItem/identifier regardless of attribute.
+    
     <xsl:template match="dcvalue[@element='relation'][@qualifier='uri']"> 
         <relatedItem type='otherVersion'>
             <location>
@@ -325,7 +326,7 @@
                     </relatedItem> 
                 </xsl:otherwise>
         </xsl:choose>   
-    </xsl:template>
+    </xsl:template>   
     <xsl:template match="dcvalue[@element='relation'][@qualifier='uri']">  
         <xsl:choose>
             <xsl:when test="starts-with(text(), 'http://')">
@@ -343,24 +344,17 @@
                 </relatedItem> 
             </xsl:otherwise>
         </xsl:choose>   
-    </xsl:template>
+    </xsl:template> -->
     
-    <xsl:template match="dcvalue[@element='identifier'][@qualifier='govdoc']">
-        <identifier>                              
-           <xsl:attribute name="type"> 
-               <xsl:text>govdoc</xsl:text>  
-           </xsl:attribute>
-           <xsl:apply-templates/>
-        </identifier>
+    <!-- identifier/citation from DSpace contains DOIs so mapping to relatedItem/identifier (see other mapping below) -->
+    <xsl:template match="dcvalue[@element='identifier'][@qualifier='citation']">
+        <relatedItem type="otherFormat">
+            <identifier>
+                <xsl:apply-templates/>
+            </identifier>
+        </relatedItem>
     </xsl:template>
-    <xsl:template match="dcvalue[@element='identifier'][@qualifier='ipc']">
-        <identifier>                              
-            <xsl:attribute name="type"> 
-                <xsl:text>ipc</xsl:text>  
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </identifier>
-    </xsl:template>
+   
     <xsl:template match="dcvalue[@element='identifier'][@qualifier='isbn']">
         <identifier>                              
             <xsl:attribute name="type"> 
@@ -369,14 +363,7 @@
             <xsl:apply-templates/>
         </identifier>
     </xsl:template>
-    <xsl:template match="dcvalue[@element='identifier'][@qualifier='ismn']">
-        <identifier>                              
-            <xsl:attribute name="type"> 
-                <xsl:text>ismn</xsl:text>  
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </identifier>
-    </xsl:template>
+    
     <xsl:template match="dcvalue[@element='identifier'][@qualifier='issn']">
         <identifier>                              
             <xsl:attribute name="type"> 
@@ -395,24 +382,20 @@
     </xsl:template>
     
     <xsl:template match="dcvalue[@element='identifier'][@qualifier='uri']">
-        <identifier>
-            <xsl:attribute name="type"> 
-                <xsl:choose>                 
-                    <xsl:when test="starts-with(text(),'http://hdl.')">
-                        <xsl:text>hdl</xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>uri</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </identifier>
-        <location>
-            <url>
-                <xsl:apply-templates/>
-            </url>            
-        </location>
+        <xsl:choose>
+            <xsl:when test="starts-with(text(),'http://hdl.')">
+                <identifier type="hdl">
+                    <xsl:apply-templates/>
+                </identifier>
+            </xsl:when>
+            <xsl:otherwise>
+                <relation type="otherFormat">
+                    <identifier>
+                        <xsl:apply-templates/>
+                    </identifier>
+                </relation>
+            </xsl:otherwise>
+         </xsl:choose>
     </xsl:template>
     
     <xsl:template match="dcvalue[@element='identifier'][@qualifier='other']">

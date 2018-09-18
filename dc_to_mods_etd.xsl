@@ -20,6 +20,8 @@
                 <digitalOrigin>born digital</digitalOrigin>
                 <internetMediaType>application/pdf</internetMediaType>           
             </physicalDescription>
+            <accessCondition type='use and reproduction' displayLabel='rightsstatements.org'>In Copyright</accessCondition>
+            <accessCondition type='use and reproduction' displayLabel='rightsstatements.org'>http://rightsstatements.org/page/InC/1.0/</accessCondition>
         </mods>
         
   <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->
@@ -439,12 +441,12 @@
         </relatedItem>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='none']">
-        <accessCondition type="useAndReproduction">
+        <accessCondition type="useAndReproduction" displayLabel='CC'>
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='uri']">
-        <accessCondition type='useAndReproduction' displayLabel="Rights URI"> 
+        <accessCondition type='useAndReproduction' displayLabel='CC URI'> 
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>

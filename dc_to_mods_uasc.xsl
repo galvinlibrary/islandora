@@ -434,13 +434,17 @@
             </location>
         </relatedItem>
     </xsl:template>
+   
+    
+    <!-- need to add test for http -->
+    
     <xsl:template match="dcvalue[@element='rights'][@qualifier='none']">
-        <accessCondition type="useAndReproduction">
+        <accessCondition type="useAndReproduction" displayLabel='CC'>
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='uri']">
-        <accessCondition type='useAndReproduction'> 
+        <accessCondition type='useAndReproduction' displayLabel='CC URI'> 
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>
@@ -523,7 +527,7 @@
         <xsl:choose>
             <xsl:when test="contains(text(), 'Collection') or contains(text(), 'collection')">
                 <genre authority="dct" authorityURI="http://purl.org/dc/terms" valueURI="http://purl.org/dc/dcmitype/Collection">
-                    <xsl:text>collection</xsl:text>
+                    <xsl:text>Collection</xsl:text>
                 </genre>
             </xsl:when>
             <xsl:otherwise>
@@ -536,10 +540,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>software, multimedia</xsl:text>
+                            <xsl:text>Software, multimedia</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ddb1">
-                            <xsl:text>dataset</xsl:text>
+                            <xsl:text>Dataset</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Article' or string(text()) = 'article'">
@@ -549,10 +553,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
-                            <xsl:text>article</xsl:text>
+                            <xsl:text>Article</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Book' or string(text()) = 'book'">
@@ -562,10 +566,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_2f33">
-                            <xsl:text>book</xsl:text>
+                            <xsl:text>Book</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Book chapter' or string(text()) = 'book chapter'">
@@ -575,10 +579,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_3248">
-                            <xsl:text>book part</xsl:text>
+                            <xsl:text>Book part</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Deliverable' or string(text()) = 'deliverable'">
@@ -588,7 +592,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>project deliverable</xsl:text>
@@ -601,10 +605,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/page/aat/300028029">
-                            <xsl:text>dissertation</xsl:text>
+                            <xsl:text>Dissertation</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Image' or string(text()) = 'image'">
@@ -614,7 +618,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ecc8">
                             <xsl:text>still image</xsl:text>
@@ -627,10 +631,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>software, multimedia</xsl:text>
+                            <xsl:text>Software, multimedia</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_5ce6">
-                            <xsl:text>software</xsl:text>
+                            <xsl:text>Software</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Image, Moving' or string(text()) = 'image, moving' or string(text()) = 'Video' or string(text()) = 'video'">
@@ -640,10 +644,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>moving image</xsl:text>
+                            <xsl:text>Moving image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8a7e">
-                            <xsl:text>moving image</xsl:text>
+                            <xsl:text>Moving image</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Image, 3-D' or string(text()) = 'image, 3-D'">
@@ -653,10 +657,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>three dimensional object</xsl:text>
+                            <xsl:text>Three dimensional object</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007159.html">
-                            <xsl:text>object</xsl:text>
+                            <xsl:text>Object</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Master&amp;apos;s Project'">
@@ -666,10 +670,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre>
-                            <xsl:text>master's project</xsl:text>
+                            <xsl:text>Master's project</xsl:text>
                         </genre>                        
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Patent' or string(text()) = 'patent'">
@@ -679,10 +683,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007520">
-                            <xsl:text>patent</xsl:text>
+                            <xsl:text>Patent</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Photographs' or string(text()) = 'photographs' or string(text()) = 'photograph' or string(text()) = 'Photograph'">
@@ -692,10 +696,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007721">
-                            <xsl:text>photograph</xsl:text>
+                            <xsl:text>Photograph</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Plan or blueprint'">
@@ -705,7 +709,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre>
                             <xsl:value-of select="."/>
@@ -718,7 +722,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
                             <xsl:text>Still image</xsl:text>
@@ -731,10 +735,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="dct" valueURI="http://purl.org/dc/dcmitype/Text">
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Thesis' or string(text()) = 'thesis'">
@@ -744,10 +748,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_46ec">
-                            <xsl:text>thesis</xsl:text>
+                            <xsl:text>Thesis</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Poster' or string(text()) = 'poster'">
@@ -757,10 +761,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm008104">
-                            <xsl:text>poster</xsl:text>
+                            <xsl:text>Poster</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Preprint' or string(text()) = 'preprint'">
@@ -770,10 +774,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
-                            <xsl:text>article</xsl:text>
+                            <xsl:text>Article</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Presentation' or string(text()) = 'presentation'">
@@ -783,7 +787,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource> 
                         <genre>
                             <xsl:value-of select="."/>
@@ -796,10 +800,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>  
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
-                            <xsl:text>project deliverable</xsl:text>
+                            <xsl:text>Project deliverable</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Project Plan'">
@@ -809,10 +813,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
-                            <xsl:text>project deliverable</xsl:text>
+                            <xsl:text>Project deliverable</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Recording, oral'">
@@ -822,10 +826,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>sound recording</xsl:text>
+                            <xsl:text>Sound recording</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18cc">
-                            <xsl:text>sound</xsl:text>
+                            <xsl:text>Sound</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Technical Report'">
@@ -835,10 +839,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18gh">
-                            <xsl:text>technical report</xsl:text>
+                            <xsl:text>Technical report</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Working Paper'">
@@ -848,10 +852,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8042">
-                            <xsl:text>working paper</xsl:text>
+                            <xsl:text>Working paper</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:otherwise>

@@ -9,8 +9,6 @@
     
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
-  
-   
     <xsl:template match="dublin_core">
         <mods version="3.4" xmlns="http://www.loc.gov/mods/v3" 
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 

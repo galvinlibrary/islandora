@@ -17,11 +17,11 @@
             xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
             <xsl:call-template name="dcMain"/>                
             <physicalDescription>
-                <digitalOrigin>born digital</digitalOrigin>
+                <digitalOrigin>reformatted digital</digitalOrigin>
                 <internetMediaType>application/pdf</internetMediaType>           
             </physicalDescription>
-            <accessCondition type='useAndReproduction' displayLabel='rightsstatements.org'>In Copyright</accessCondition>
-            <accessCondition type='useAndReproduction' displayLabel='rightsstatements.orgURI'>http://rightsstatements.org/page/InC/1.0/</accessCondition>
+            <accessCondition type="useAndReproduction" displayLabel='cc'>Public Domain Mark 1.0</accessCondition>
+            <accessCondition type='useAndReproduction' displayLabel='ccURI'>https://creativecommons.org/publicdomain/mark/1.0/</accessCondition>
         </mods>
         
   <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->

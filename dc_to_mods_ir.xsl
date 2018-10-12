@@ -22,6 +22,8 @@
                     <!-- MIME type, pull from file information -->
                 </internetMediaType>           
             </physicalDescription>
+            <accessCondition type='useAndReproduction' displayLabel='rightsstatements.org'>In Copyright</accessCondition>
+            <accessCondition type='useAndReproduction' displayLabel='rightsstatements.orgURI'>http://rightsstatements.org/page/InC/1.0/</accessCondition>
         </mods>
         
   <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->
@@ -441,12 +443,12 @@
         </relatedItem>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='none']">
-        <accessCondition type="useAndReproduction" displayLabel='CC'>
+        <accessCondition type="useAndReproduction" displayLabel='cc'>
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>
     <xsl:template match="dcvalue[@element='rights'][@qualifier='uri']">
-        <accessCondition type='useAndReproduction' displayLabel='CC URI'> 
+        <accessCondition type='useAndReproduction' displayLabel='ccURI'> 
             <xsl:apply-templates/>
         </accessCondition>
     </xsl:template>

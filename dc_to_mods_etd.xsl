@@ -7,27 +7,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="sru_dc oai_dc dc" 
     version="2.0">
     
+    <!-- This template transforms Dublin Core metadata from repository.iit DSpace instance to MODS version 3. Created August 2018-->
+    <!-- customized for ETDs -->
+    
+    <!-- Fields defined in Islandora Metadata Registry and DC and MODS crosswalks Google sheets -->
+    <!-- URIs added for controlled vocabularies whenever possible -->    
+    
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
-  
+    <xsl:param name="genreTerm" select="."/>  
    
-    <xsl:template match="dublin_core">
-        <mods version="3.4" xmlns="http://www.loc.gov/mods/v3" 
+    <xsl:template match="dublin_core"> <!-- creates MODS top element wrapper-->
+        <mods version="3.7" xmlns="http://www.loc.gov/mods/v3" 
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-            xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd">
+            xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-7.xsd">
             <xsl:call-template name="dcMain"/>                
             <physicalDescription>
+                <!-- Hard coded born digital since most ETDs are born digital-->
                 <digitalOrigin>born digital</digitalOrigin>
+                <!-- Hard coded application/pdf since all ETDs are PDF-->
                 <internetMediaType>application/pdf</internetMediaType>           
             </physicalDescription>
+            <!-- Hard coded In Copyright since this is the status for all ETDs-->
             <accessCondition type='useAndReproduction' displayLabel='rightsstatements.org'>In Copyright</accessCondition>
             <accessCondition type='useAndReproduction' displayLabel='rightsstatements.orgURI'>http://rightsstatements.org/page/InC/1.0/</accessCondition>
         </mods>
         
-  <!-- this version removed the metadata_iit hard coding and nested all physicalDescription subelements together -->
-  <!-- this version removed non nested physicalDescription tags -->    
+     
     </xsl:template>  
-    <xsl:template name="dcMain">
+    <xsl:template name="dcMain"> <!-- Main template, applies a template for each Dublin Core element. 
+        Formatted to match DSpace Dublin Core elements -->
         <xsl:apply-templates select="dcvalue[@element='title'][@qualifier='none']"/>
         <xsl:apply-templates select="dcvalue[@element='title'][@qualifier='alternative']"/>
         <xsl:apply-templates select="dcvalue[@element='contributor'][@qualifier='author']"/>
@@ -174,7 +183,7 @@
         </originInfo>
     </xsl:template>
 
-    
+    <!-- Date Issued maps to Date Created for ETDs -->
     <xsl:template match="dcvalue[@element='date'][@qualifier='issued']">
         <originInfo>
         <xsl:call-template name ="splitDatesIssued">
@@ -183,35 +192,9 @@
         </originInfo>
     </xsl:template>
     
+    <!-- If the date element contains a range (YYYY-YYYY) then date segments are pulled into 
+        separate date elements with start/end attributes-->
     <xsl:template name="splitDatesIssued">
-        <xsl:param name="dates"/>
-        <xsl:param name="dash" select="'-'"/>
-        <xsl:choose>
-            <xsl:when test="translate(., '123456789', '000000000') = '0000-0000'">
-                <dateIssued encoding='iso8601' point='start'>
-                    <xsl:value-of select="substring-before($dates, $dash)"/>
-                </dateIssued>
-                <dateIssued encoding='iso8601' point='end'>
-                    <xsl:value-of select="substring-after($dates, $dash)" />
-                </dateIssued>
-            </xsl:when>
-            <xsl:otherwise>
-                <dateIssued>
-                    <xsl:value-of select="$dates"/>
-                </dateIssued>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>   
-    
-    <xsl:template match="dcvalue[@element='date'][@qualifier='none']">
-        <originInfo>
-            <xsl:call-template name ="splitDates">
-                <xsl:with-param name="dates" select="."/>
-            </xsl:call-template>
-        </originInfo>
-    </xsl:template>
-        
-    <xsl:template name="splitDates">
         <xsl:param name="dates"/>
         <xsl:param name="dash" select="'-'"/>
         <xsl:choose>
@@ -227,6 +210,38 @@
                 <dateCreated>
                     <xsl:value-of select="$dates"/>
                 </dateCreated>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>   
+    
+    <!-- Date with no attribute maps to date captured for ETDs -->
+    <xsl:template match="dcvalue[@element='date'][@qualifier='none']">
+        <originInfo>
+            <xsl:call-template name ="splitDates">
+                <xsl:with-param name="dates" select="."/>
+            </xsl:call-template>
+        </originInfo>
+    </xsl:template>
+    
+
+    <!-- If the date element contains a range (YYYY-YYYY) then date segments are pulled into 
+        separate date elements with start/end attributes--> 
+    <xsl:template name="splitDates">
+        <xsl:param name="dates"/>
+        <xsl:param name="dash" select="'-'"/>
+        <xsl:choose>
+            <xsl:when test="translate(., '123456789', '000000000') = '0000-0000'">
+                <dateCaptured encoding='iso8601' point='start'>
+                    <xsl:value-of select="substring-before($dates, $dash)"/>
+                </dateCaptured>
+                <dateCaptured encoding='iso8601' point='end'>
+                    <xsl:value-of select="substring-after($dates, $dash)" />
+                </dateCaptured>
+            </xsl:when>
+            <xsl:otherwise>
+                <dateCaptured>
+                    <xsl:value-of select="$dates"/>
+                </dateCaptured>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>   
@@ -526,7 +541,6 @@
         <!-- Transforms DC type value to MODS typeOfResource controlled vocabulary value-->
         <!-- And and creates new genre element with original DC type value-->
         <!---Islandora SOLR index on genre value--> 
-        <xsl:param name="genreTerm" select="."/>        
         <xsl:variable name="collection">
             <xsl:if test="../dc:dcvalue[@element='type'][string(text()) = 'collection' or string(text()) = 'Collection']">true</xsl:if>
         </xsl:variable>
@@ -546,7 +560,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>software, multimedia</xsl:text>
+                            <xsl:text>Software, multimedia</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ddb1">
                             <xsl:text>Dataset</xsl:text>
@@ -559,7 +573,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:text>Article</xsl:text>
@@ -572,7 +586,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_2f33">
                             <xsl:text>Book</xsl:text>
@@ -585,7 +599,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_3248">
                             <xsl:text>Book part</xsl:text>
@@ -598,7 +612,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>Project deliverable</xsl:text>
@@ -611,10 +625,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/page/aat/300028029">
-                            <xsl:text>dissertation</xsl:text>
+                            <xsl:text>Dissertation</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Image' or string(text()) = 'image'">
@@ -624,7 +638,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ecc8">
                             <xsl:text>Still image</xsl:text>
@@ -637,7 +651,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>software, multimedia</xsl:text>
+                            <xsl:text>Software, multimedia</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_5ce6">
                             <xsl:text>Software</xsl:text>
@@ -650,7 +664,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>moving image</xsl:text>
+                            <xsl:text>Moving image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8a7e">
                             <xsl:text>Moving image</xsl:text>
@@ -663,7 +677,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>three dimensional object</xsl:text>
+                            <xsl:text>Three dimensional object</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007159.html">
                             <xsl:text>Object</xsl:text>
@@ -676,7 +690,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre>
                             <xsl:text>Master's project</xsl:text>
@@ -689,7 +703,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007520">
                             <xsl:text>Patent</xsl:text>
@@ -702,11 +716,16 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
-                        <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007721">
-                            <xsl:text>Photograph</xsl:text>
+                        <genre authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
+                            <xsl:text>Still image</xsl:text>
                         </genre>
+                        <!-- photograph as Type value in DC maps to Form in MODS -->
+                        <physicalDescription>
+                            <form authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007721">Photograph</form>
+                        </physicalDescription>
+                        
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Plan or blueprint'">
                         <typeOfResource>
@@ -715,7 +734,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre>
                             <xsl:value-of select="."/>
@@ -728,7 +747,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>still image</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
                             <xsl:text>Still image</xsl:text>
@@ -741,7 +760,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="dct" valueURI="http://purl.org/dc/dcmitype/Text">
                             <xsl:text>Text</xsl:text>
@@ -754,7 +773,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_46ec">
                             <xsl:text>Thesis</xsl:text>
@@ -767,7 +786,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
                         <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm008104">
                             <xsl:text>Poster</xsl:text>
@@ -780,7 +799,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:text>Article</xsl:text>
@@ -793,7 +812,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource> 
                         <genre>
                             <xsl:value-of select="."/>
@@ -806,12 +825,13 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>mixed material</xsl:text>
+                            <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>  
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>Project deliverable</xsl:text>
                         </genre>
                     </xsl:when>
+                   
                     <xsl:when test="string(text()) = 'Project Plan'">
                         <typeOfResource>
                             <xsl:if test="$collection='true'">
@@ -819,7 +839,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>Project deliverable</xsl:text>
@@ -832,10 +852,10 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>sound recording</xsl:text>
+                            <xsl:text>Sound recording</xsl:text>
                         </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18cc">
-                            <xsl:text>Sound</xsl:text>
+                        <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026115">
+                            <xsl:text>Interviews</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Technical Report'">
@@ -845,7 +865,7 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18gh">
                             <xsl:text>Technical report</xsl:text>
@@ -858,19 +878,19 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>text</xsl:text>
+                            <xsl:text>Text</xsl:text>
                         </typeOfResource>
                         <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8042">
                             <xsl:text>Working paper</xsl:text>
                         </genre>
                     </xsl:when>
                     <xsl:otherwise>
-                            <genre>                                                       
-                                <xsl:value-of select="concat(translate(substring($genreTerm, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($genreTerm, 2))"/>
-                            </genre>
+                        <genre>                                                       
+                            <xsl:value-of select="concat(translate(substring($genreTerm, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($genreTerm, 2))"/>
+                        </genre>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>       
+    </xsl:template>         
 </xsl:stylesheet>

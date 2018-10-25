@@ -147,7 +147,19 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 			<xsl:value-of select="."/>
 		</dc:description>
 	</xsl:template>
-
+	
+	<xsl:template match="mods:note[@type='funding']">
+		<dc:description>
+			<xsl:value-of select="."/>
+		</dc:description>
+	</xsl:template>
+	
+	<xsl:template match="mods:note[@type='thesis']">
+		<dc:description>
+			<xsl:value-of select="."/>
+		</dc:description>
+	</xsl:template>
+	
 	<xsl:template match="mods:originInfo">
 		<xsl:apply-templates select="*[@point='start']"/>
 		<xsl:for-each

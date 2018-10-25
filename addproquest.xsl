@@ -38,7 +38,7 @@
             <xsl:for-each select="dcvalue[@element='subject']">
                 <xsl:element name="dcvalue">
                     <xsl:attribute name="element">description</xsl:attribute>
-                    <xsl:attribute name="qualifier">none</xsl:attribute>
+                    <xsl:attribute name="qualifier">thesis</xsl:attribute>
                     <xsl:attribute name="language">en_US</xsl:attribute>
                     <xsl:value-of select="."/>
                 </xsl:element>

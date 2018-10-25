@@ -205,62 +205,12 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	</xsl:template>
 	
 	
-	<xsl:template match="mods:genre">
-				<dc:type>
-					<xsl:value-of select="."/>
-				</dc:type>
-<!--				<xsl:apply-templates select="mods:typeOfResource"/>  -->
-	</xsl:template>
+	
 
-	<xsl:template match="mods:typeOfResource">	
-		<xsl:choose>
-			<xsl:when test="contains(text(), 'Collection') or contains(text(), 'collection')">
-				<dc:type>collection</dc:type>
-			</xsl:when>		
-			<xsl:otherwise>
-				<!-- dc.type to mods.typeOfResource is based on LOC Dublin Core Metadata Element Set Mapping to MODS Version 3 mapping at  -->
-				<xsl:choose>
-					<xsl:when test="string(text()) = 'Dataset' or string(text()) = 'dataset'">
-						<dc:type>dataset</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
-						<dc:type>service</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
-						<dc:type>software</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'cartographic material' or string(text()) = 'Cartographic material'">
-						<dc:type>image</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'multimedia' or string(text()) = 'Multimedia'">
-						<dc:type>interactive resource</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'moving image' or string(text()) = 'Moving image'">
-						<dc:type>moving image</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'three dimensional object' or string(text()) = 'Three dimensional object'">
-						<dc:type>physical object</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'still image' or string(text()) = 'Still image'">
-						<dc:type>still image</dc:type>
-					</xsl:when>
-					<xsl:when test="starts-with(.,'sound recording' or string(text()) = 'Sound recording')">
-						<dc:type>sound</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'text' or string(text()) = 'Text'">
-						<dc:type>text</dc:type>
-					</xsl:when>
-					<xsl:when test="string(text()) = 'notated music' or string(text()) = 'Notated music'">
-						<dc:type>text</dc:type>
-					</xsl:when>
-					<xsl:otherwise>
-						<dc:type>
-							<xsl:value-of select="."/>
-						</dc:type>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:otherwise>			
-		</xsl:choose>
+	<xsl:template match="mods:typeOfResource">			
+			<dc:type>
+				<xsl:value-of select="."/>
+			</dc:type>	
 	</xsl:template>
 	
 	

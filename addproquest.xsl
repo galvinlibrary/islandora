@@ -3,6 +3,16 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xlink="http://www.w3.org/1999/xlink"
     version="2.0">
     
+    
+    <!-- This transform adds Proquest metadata to Dublin Core XML from DSpace and re-maps Dublin Core fields. This transforms creates a new Dublin Core XML. -->
+    
+    <!-- Specifically it corrects 2 errors:
+           1. Subject terms missing from orginal Dublin Core, this document adds them from Proquest XML
+           2. Original Dublin Core contains academic program and date Thesis/dissertation was awarded in subject elements, 
+              this document moves them to Description (with "none" attribute) field. -->
+    
+    <!-- This transform references the proquest.xml document (for pre-processing scripting reasons) -->
+    
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
     <xsl:template match="@*|node()">

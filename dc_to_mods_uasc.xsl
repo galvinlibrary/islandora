@@ -209,15 +209,15 @@
         <xsl:param name="dash" select="'-'"/>
         <xsl:choose>
             <xsl:when test="translate(., '123456789', '000000000') = '0000-0000'">
-                <dateCreated encoding='iso8601' point='start'>
+                <dateCreated keyDate="yes" encoding='iso8601' point='start'>
                     <xsl:value-of select="substring-before($dates, $dash)"/>
                 </dateCreated>
-                <dateCreated encoding='iso8601' point='end'>
+                <dateCreated keyDate="yes" encoding='iso8601' point='end'>
                     <xsl:value-of select="substring-after($dates, $dash)" />
                 </dateCreated>
             </xsl:when>
             <xsl:otherwise>
-                <dateCreated>
+                <dateCreated keyDate="yes">
                     <xsl:value-of select="$dates"/>
                 </dateCreated>
             </xsl:otherwise>
@@ -534,105 +534,84 @@
         </topic>
     </xsl:template>
     
-                
-    
     <xsl:template match="dcvalue[@element='type']">
         <!--2.0: Variable test for any dc:type with value of collection for mods:typeOfResource -->
-        <!-- Transforms DC type value to MODS typeOfResource controlled vocabulary value-->
-        <!-- And and creates new genre element with original DC type value-->
-        <!---Islandora SOLR index on genre value--> 
+        <!-- Transforms DC type value to typeOfResource controlled vocabulary value--> 
+        <xsl:param name="genreTerm" select="."/>        
         <xsl:variable name="collection">
             <xsl:if test="../dc:dcvalue[@element='type'][string(text()) = 'collection' or string(text()) = 'Collection']">true</xsl:if>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="contains(text(), 'Collection') or contains(text(), 'collection')">
-                <genre authority="dct" authorityURI="http://purl.org/dc/terms" valueURI="http://purl.org/dc/dcmitype/Collection">
+                <typeOfResource authority="dct" authorityURI="http://purl.org/dc/terms" valueURI="http://purl.org/dc/dcmitype/Collection">
                     <xsl:text>Collection</xsl:text>
-                </genre>
+                </typeOfResource>
             </xsl:when>
             <xsl:otherwise>
                 <!-- dc.type to mods.typeOfResource is based on LOC Dublin Core Metadata Element Set Mapping to MODS Version 3 mapping at  -->
                 <xsl:choose>
                     <xsl:when test="string(text()) = 'Dataset' or string(text()) = 'dataset'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_ddb1">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Software, multimedia</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ddb1">
                             <xsl:text>Dataset</xsl:text>
-                        </genre>
+                        </typeOfResource>                      
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Article' or string(text()) = 'article'">
-                        <typeOfResource>
+                        <typeOfResource authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:text>Article</xsl:text>
-                        </genre>
+                        </typeOfResource>                      
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Book' or string(text()) = 'book'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_2f33">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_2f33">
                             <xsl:text>Book</xsl:text>
-                        </genre>
+                        </typeOfResource>                       
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Book chapter' or string(text()) = 'book chapter'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_3248">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_3248">
                             <xsl:text>Book part</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Deliverable' or string(text()) = 'deliverable'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Mixed material</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>Project deliverable</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Dissertation' or string(text()) = 'dissertation'">
-                        <typeOfResource>
+                        <typeOfResource authority="aat" valueURI="http://vocab.getty.edu/page/aat/300028029">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>	
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="aat" valueURI="http://vocab.getty.edu/page/aat/300028029">
                             <xsl:text>Dissertation</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Image' or string(text()) = 'image'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_ecc8">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -640,25 +619,20 @@
                             </xsl:if>
                             <xsl:text>Still image</xsl:text>
                         </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_ecc8">
-                            <xsl:text>Still image</xsl:text>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Software' or string(text()) = 'software'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_5ce6">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Software, multimedia</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_5ce6">
                             <xsl:text>Software</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
+                    
                     <xsl:when test="string(text()) = 'Image, Moving' or string(text()) = 'image, moving' or string(text()) = 'Video' or string(text()) = 'video'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_8a7e">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -666,22 +640,17 @@
                             </xsl:if>
                             <xsl:text>Moving image</xsl:text>
                         </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8a7e">
-                            <xsl:text>Moving image</xsl:text>
-                        </genre>
                     </xsl:when>
+                    
                     <xsl:when test="string(text()) = 'Image, 3-D' or string(text()) = 'image, 3-D'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_ecc8">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Three dimensional object</xsl:text>
+                            <xsl:text>Still image</xsl:text>
                         </typeOfResource>
-                        <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007159.html">
-                            <xsl:text>Object</xsl:text>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Master&amp;apos;s Project'">
                         <typeOfResource>
@@ -690,27 +659,22 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Mixed material</xsl:text>
-                        </typeOfResource>
-                        <genre>
                             <xsl:text>Master's project</xsl:text>
-                        </genre>                        
+                        </typeOfResource>        
                     </xsl:when>
+                    
                     <xsl:when test="string(text()) = 'Patent' or string(text()) = 'patent'">
-                        <typeOfResource>
+                        <typeOfResource authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007520">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007520">
                             <xsl:text>Patent</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Photographs' or string(text()) = 'photographs' or string(text()) = 'photograph' or string(text()) = 'Photograph'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -718,30 +682,23 @@
                             </xsl:if>
                             <xsl:text>Still image</xsl:text>
                         </typeOfResource>
-                        <genre authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
-                            <xsl:text>Still image</xsl:text>
-                        </genre>
                         <!-- photograph as Type value in DC maps to Form in MODS -->
                         <physicalDescription>
-                            <form authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm007721">Photograph</form>
+                            <form authority="aat" valueURI="http://vocab.getty.edu/page/aat/300046300">Photographs</form>
                         </physicalDescription>
-                        
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Plan or blueprint'">
-                        <typeOfResource>
+                        <typeOfResource authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2017027217">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Still image</xsl:text>
+                            <xsl:text>Architectural drawing</xsl:text>
                         </typeOfResource>
-                        <genre>
-                            <xsl:value-of select="."/>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'StillImage' or string(text()) = 'stillimage' or string(text()) = 'Still Image' or string(text()) = 'still image' or string(text()) = 'stillImage' or string(text()) = 'Still image' ">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -749,12 +706,9 @@
                             </xsl:if>
                             <xsl:text>Still image</xsl:text>
                         </typeOfResource>
-                        <genre authority="coar" valueURI="ttp://purl.org/coar/resource_type/c_ecc8">
-                            <xsl:text>Still image</xsl:text>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Text' or string(text()) = 'text'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_18cf">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -762,25 +716,19 @@
                             </xsl:if>
                             <xsl:text>Text</xsl:text>
                         </typeOfResource>
-                        <genre authority="dct" valueURI="http://purl.org/dc/dcmitype/Text">
-                            <xsl:text>Text</xsl:text>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Thesis' or string(text()) = 'thesis'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_46ec">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_46ec">
                             <xsl:text>Thesis</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Poster' or string(text()) = 'poster'">
-                        <typeOfResource>
+                        <typeOfResource authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm008104">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
@@ -788,22 +736,16 @@
                             </xsl:if>
                             <xsl:text>Mixed material</xsl:text>
                         </typeOfResource>
-                        <genre authority="gmgpc" valueURI="http://id.loc.gov/vocabulary/graphicMaterials/tgm008104">
-                            <xsl:text>Poster</xsl:text>
-                        </genre>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Preprint' or string(text()) = 'preprint'">
-                        <typeOfResource>
+                        <typeOfResource authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="aat" valueURI="http://vocab.getty.edu/aat/300048715">
                             <xsl:text>Article</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Presentation' or string(text()) = 'presentation'">
                         <typeOfResource>
@@ -812,85 +754,68 @@
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Mixed material</xsl:text>
+                            <xsl:text>Presentation</xsl:text>
                         </typeOfResource> 
-                        <genre>
-                            <xsl:value-of select="."/>
-                        </genre>
                     </xsl:when>
+                    
                     <xsl:when test="string(text()) = 'Project' or string(text()) = 'project'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Mixed material</xsl:text>
+                            <xsl:text>Project deliverable</xsl:text>
                         </typeOfResource>  
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
-                            <xsl:text>Project deliverable</xsl:text>
-                        </genre>
                     </xsl:when>
-                   
+                    
                     <xsl:when test="string(text()) = 'Project Plan'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18op">
                             <xsl:text>Project deliverable</xsl:text>
-                        </genre>
+                        </typeOfResource>
                     </xsl:when>
                     <xsl:when test="string(text()) = 'Recording, oral'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_26e4">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Sound recording</xsl:text>
+                            <xsl:text>Interview</xsl:text>
                         </typeOfResource>
-                        <genre authority="lcgft" valueURI="http://id.loc.gov/authorities/genreForms/gf2014026115">
-                            <xsl:text>Interviews</xsl:text>
-                        </genre>
-                    </xsl:when>
-                    <xsl:when test="string(text()) = 'Technical Report'">
-                        <typeOfResource>
+                    </xsl:when>                    
+                    <xsl:when test="string(text()) = 'Technical Report' or 'technical report'">
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_18gh">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_18gh">
                             <xsl:text>Technical report</xsl:text>
-                        </genre>
-                    </xsl:when>
+                        </typeOfResource>
+                    </xsl:when>                   
                     <xsl:when test="string(text()) = 'Working Paper'">
-                        <typeOfResource>
+                        <typeOfResource authority="coar" valueURI="http://purl.org/coar/resource_type/c_8042">
                             <xsl:if test="$collection='true'">
                                 <xsl:attribute name="collection">
                                     <xsl:text>yes</xsl:text>
                                 </xsl:attribute>
                             </xsl:if>
-                            <xsl:text>Text</xsl:text>
-                        </typeOfResource>
-                        <genre authority="coar" valueURI="http://purl.org/coar/resource_type/c_8042">
                             <xsl:text>Working paper</xsl:text>
-                        </genre>
-                    </xsl:when>
+                        </typeOfResource>
+                    </xsl:when>                    
                     <xsl:otherwise>
-                        <genre>                                                       
+                        <typeOfResource>                                                       
                             <xsl:value-of select="concat(translate(substring($genreTerm, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring($genreTerm, 2))"/>
-                        </genre>
+                        </typeOfResource>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>       
+    </xsl:template>                               
 </xsl:stylesheet>

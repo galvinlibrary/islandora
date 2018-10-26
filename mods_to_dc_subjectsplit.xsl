@@ -150,7 +150,7 @@ Version 1.0	2007-05-04 Tracy Meehleib <tmee@loc.gov>
 	
 	<xsl:template match="mods:note[@type='funding']">
 		<dc:description>
-			<xsl:value-of select="."/>
+			<xsl:text>Sponsorship: </xsl:text><xsl:value-of select="."/>
 		</dc:description>
 	</xsl:template>
 	

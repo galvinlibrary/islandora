@@ -30,8 +30,8 @@
                 <internetMediaType>application/pdf</internetMediaType>           
             </physicalDescription>
             <!-- Hard coded Public Domain since all patents are-->
-            <accessCondition type="useAndReproduction" displayLabel='cc'>Public Domain Mark 1.0</accessCondition>
-            <accessCondition type='useAndReproduction' displayLabel='ccURI'>https://creativecommons.org/publicdomain/mark/1.0/</accessCondition>
+            <accessCondition type="useAndReproduction" displayLabel='rightsstatements.org'>No Copyright - United States</accessCondition>
+            <accessCondition type='useAndReproduction' displayLabel='rightsstatements.orgURI'>http://rightsstatements.org/page/NoC-US/1.0/</accessCondition>
             <!-- Hard coded Open Access -->
             <accessCondition type='restrictionOnAccess'>Open Access</accessCondition>
         </mods>
@@ -185,7 +185,7 @@
         </originInfo>
     </xsl:template>
 
-    
+    <!-- Date Issued maps to Date Created for patents -->
     <xsl:template match="dcvalue[@element='date'][@qualifier='issued']">
         <originInfo>
         <xsl:call-template name ="splitDatesIssued">
@@ -201,22 +201,22 @@
         <xsl:param name="dash" select="'-'"/>
         <xsl:choose>
             <xsl:when test="translate(., '123456789', '000000000') = '0000-0000'">
-                <dateIssued encoding='iso8601' point='start'>
+                <dateCreated keyDate="yes" encoding='iso8601' point='start'>
                     <xsl:value-of select="substring-before($dates, $dash)"/>
-                </dateIssued>
-                <dateIssued encoding='iso8601' point='end'>
+                </dateCreated>
+                <dateCreated keyDate="yes" encoding='iso8601' point='end'>
                     <xsl:value-of select="substring-after($dates, $dash)" />
-                </dateIssued>
+                </dateCreated>
             </xsl:when>
             <xsl:otherwise>
-                <dateIssued>
+                <dateCreated keyDate="yes">
                     <xsl:value-of select="$dates"/>
-                </dateIssued>
+                </dateCreated>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>   
     
-    <!-- Date with no attribute maps to dateCreated -->
+    <!-- Date with no attribute maps to date captured for patents -->
     <xsl:template match="dcvalue[@element='date'][@qualifier='none']">
         <originInfo>
             <xsl:call-template name ="splitDates">
@@ -232,17 +232,17 @@
         <xsl:param name="dash" select="'-'"/>
         <xsl:choose>
             <xsl:when test="translate(., '123456789', '000000000') = '0000-0000'">
-                <dateCreated keyDate="yes" encoding='iso8601' point='start'>
+                <dateCaptured encoding='iso8601' point='start'>
                     <xsl:value-of select="substring-before($dates, $dash)"/>
-                </dateCreated>
-                <dateCreated keyDate="yes" encoding='iso8601' point='end'>
+                </dateCaptured>
+                <dateCaptured encoding='iso8601' point='end'>
                     <xsl:value-of select="substring-after($dates, $dash)" />
-                </dateCreated>
+                </dateCaptured>
             </xsl:when>
             <xsl:otherwise>
-                <dateCreated keyDate="yes">
+                <dateCaptured>
                     <xsl:value-of select="$dates"/>
-                </dateCreated>
+                </dateCaptured>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>   

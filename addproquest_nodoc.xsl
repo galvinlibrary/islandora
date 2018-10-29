@@ -44,12 +44,7 @@
                 </xsl:element>
             </xsl:for-each>
             
-            <xsl:element name="dcvalue">
-                <xsl:attribute name="element">description</xsl:attribute>
-                <xsl:attribute name="qualifier">thesis</xsl:attribute>
-                <xsl:attribute name="language">en_US</xsl:attribute>
-                <xsl:value-of select="."/>        
-            </xsl:element>
+           
            
             <!--Pulls elements from proquest xml, removed reference to doc -->
         <xsl:for-each select="DISS_submission/DISS_description/DISS_categorization/DISS_keyword">

@@ -36,12 +36,22 @@
             <xsl:copy-of select="dcvalue[@element='description']"/>
          
             <xsl:for-each select="dcvalue[@element='subject']">
-                <xsl:element name="dcvalue">
-                    <xsl:attribute name="element">description</xsl:attribute>
-                    <xsl:attribute name="qualifier">thesis</xsl:attribute>
-                    <xsl:attribute name="language">en_US</xsl:attribute>
-                    <xsl:value-of select="."/>
-                </xsl:element>
+                <xsl:variable name="subjectTerm" select="."/>
+                <xsl:choose>
+                    <xsl:when test="not(starts-with($subjectTerm, 'M.S.') or starts-with($subjectTerm, 'Ph.D') or starts-with($subjectTerm, 'PH.D') or starts-with($subjectTerm, 'M.Arch'))">
+                        <dcvalue element="subject" qualifier="none" language="en_US">
+                            <xsl:value-of select="$subjectTerm"/>
+                        </dcvalue>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:element name="dcvalue">
+                            <xsl:attribute name="element">description</xsl:attribute>
+                            <xsl:attribute name="qualifier">none</xsl:attribute>
+                            <xsl:attribute name="language">en_US</xsl:attribute>
+                            <xsl:value-of select="$subjectTerm"/>
+                        </xsl:element>
+                    </xsl:otherwise>
+                </xsl:choose>    
             </xsl:for-each>
             
         <xsl:for-each select="document('proquest.xml')/DISS_submission/DISS_description/DISS_categorization/DISS_keyword">

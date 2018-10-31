@@ -476,64 +476,14 @@
         </relatedItem>
     </xsl:template>    
     
+    
+    <!-- For patents only: maps subject to abstract because all DSpace subject values in the patent collection are a variation on "United States Patent". -->
     <xsl:template match="dcvalue[@element='subject']">
-        <xsl:variable name="term" select="."/>  
-        <xsl:variable name="firstLetter" select="substring($term,1,1)"/>
-        <subject>
-            <xsl:choose>
-  
-                   <xsl:when test="contains($term,',') or contains($term,';')">                             
-                         <xsl:call-template name="tokenize">
-                               <xsl:with-param name="text" select="$term"/>   
-                         </xsl:call-template>                                     
-                   </xsl:when>
-               
-                    <xsl:otherwise>
-                        <xsl:call-template name="printSubject">
-                            <xsl:with-param name="text" select="$term"/>
-                        </xsl:call-template>
-                    </xsl:otherwise>
-            </xsl:choose>
-        </subject>
+            <abstract>
+                <xsl:value-of select="normalize-space(.)" />          
+            </abstract>
     </xsl:template>
-    
-    <xsl:template name="tokenize">
-      <xsl:param name="text"/> 
-        <xsl:param name="comma" select="', '"/>  
-        <xsl:param name="semicolon" select="'; '"/>
-        <xsl:choose>                      
-            <xsl:when test="contains($text, $comma)">      
-                    <topic>
-                        <xsl:value-of select="substring-before($text, $comma)"/>
-                    </topic>      
-                    <!--recursive call -->
-                    <xsl:call-template name="tokenize">
-                        <xsl:with-param name="text" select="substring-after($text, $comma)" />
-                    </xsl:call-template>   
-            </xsl:when>
-            <xsl:when test="contains($text, $semicolon)">  
-                <topic>
-                    <xsl:value-of select="substring-before($text, $semicolon)"/>
-                </topic>      
-                <!--recursive call -->
-                <xsl:call-template name="tokenize">
-                    <xsl:with-param name="text" select="substring-after($text, $semicolon)" />
-                </xsl:call-template>   
-            </xsl:when>
-            <xsl:otherwise>
-                <topic>
-               <xsl:value-of select="$text"/>
-                </topic>
-            </xsl:otherwise>    
-        </xsl:choose>    
-  </xsl:template>    
-    
-    <xsl:template name="printSubject">
-        <xsl:param name="text"/>
-        <topic>
-            <xsl:value-of select="$text"/>                 
-        </topic>
-    </xsl:template>
+   
     
                 
     

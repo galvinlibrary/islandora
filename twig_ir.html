@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% block content %}
+{% autoescape true %}
+<mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd"> 
+  
+<titleInfo>
+	<title>{{ data.title|trim|escape }}</title>
+</titleInfo>
+
+{% if attribute(data, 'title_alternative') %}
+<titleInfo type="alternative">
+	<title>{{ data.title_alternative|trim|escape }}</title>
+</titleInfo>
+{% endif %}
+
+{% if attribute(data, 'name_creator_primary') %}
+{% for creator in attribute(data, 'name_creator_primary')|split (';') %}
+<name>
+	<namePart>{{ creator|trim }}</namePart>
+	<role>
+		<roleTerm authority="marcrelator" type="text">Creator</roleTerm>
+	</role>
+{% endfor %}
+{% endif %}
+
+{% if  attribute(data, 'creator_primary_status') %}
+{% for status in attribute(data, 'creator_primary_status')|split (';') %}
+	<description>{{ status|trim }}</description>
+{% endfor %}
+{% endif %}
+</name>
+
+
+
+
+{% if attribute(data, 'name_creator_others') %}
+{% for creator in attribute(data, 'name_creator_others')|split (';') %}
+<name>
+	<namePart>{{ creator|trim }}</namePart>
+		<role>
+			<roleTerm authority="marcrelator" type="text">Creator</roleTerm>
+		</role>
+	</name>
+{% endfor %}
+{% endif %}
+
+{% if attribute(data, 'name_contributor') %}
+{% for creator in attribute(data, 'name_contributor')|split (';') %}
+<name>
+	<namePart>{{ creator|trim }}</namePart>
+	<role>
+		<roleTerm authority="marcrelator" type="text">Contributor</roleTerm>
+	</role>
+</name>
+{% endfor %}
+{% endif %}
+
+
+{% if attribute(data, 'name_editor') %}
+{% for contributor in attribute(data, 'name_editor')|split (';') %}
+	<name>
+		<namePart>{{ contributor|trim }}</namePart>
+		<role>
+			<roleTerm authority="marcrelator" type="text">Editor</roleTerm>
+		</role>
+	</name>
+{% endfor %}
+{% endif %}
+
+{% if attribute(data, 'name_advisor') %}
+{% for contributor in attribute(data, 'name_advisor')|split (';') %}
+<name type="personal">
+	<namePart>{{ contributor|trim }}</namePart>
+	<role>
+		<roleTerm authority="marcrelator" type="text">Advisor</roleTerm>
+	</role>
+</name>
+{% endfor %}
+{% endif %}
+
+{% if attribute(data, 'department_name') %}
+	<name type="corporate">
+		<namePart>{{data.department_name|trim }}</namePart>
+		<affiliation>Illinois Institute of Technology</affiliation>
+		<role>
+			<roleTerm type="text">Affiliated department</roleTerm>
+		</role>
+	</name>
+{% endif %}
+
+{% if attribute(data, 'subject_topic') %}
+{% for topic in attribute(data, 'subject_topic')|split (';') %}
+<subject>
+	<topic>{{ topic|trim }}</topic>
+</subject>
+{% endfor %}
+{% endif %}
+
+
+{% if attribute(data, 'date_copyright') or attribute(data, 'date_created') or attribute(data, 'date_issued') or attribute(data, 'publisher') or attribute(data, 'publisher_location') %}
+<originInfo>	
+{% if ('?' not in attribute(data, 'date_created')) and ('circa' not in attribute(data, 'date_created')) and ('[' not in attribute(data, 'date_created'))   %} 
+	<dateCreated encoding="w3cdtf" keyDate="yes">{{ data.date_created }}</dateCreated>
+{% endif %}
+{% if '?' in attribute(data, 'date_created') %}
+	<dateCreated encoding="w3cdtf" keyDate="yes" qualifier="questionable">{{ data.date_created|trim('?') }}</dateCreated>
+{% endif %}
+{% if 'circa' in attribute(data, 'date_created') %}
+	<dateCreated encoding="w3cdtf" keyDate="yes" qualifier="approximate">{{ data.date_created|trim('circa') }}</dateCreated>
+{% endif %}
+{% if '[' in attribute(data, 'date_created') %}
+	<dateCreated encoding="w3cdtf" keyDate="yes" qualifier="inferred">{{ data.date_created|trim('[' and ']') }}</dateCreated>
+{% endif %}
+{% if ('?' not in attribute(data, 'date_published')) and ('circa' not in attribute(data, 'date_published')) and ('[' not in attribute(data, 'date_published'))   %} 
+	<dateIssued encoding="w3cdtf">{{ data.date_published }}</dateIssued>
+{% endif %} 
+{% if '?' in attribute(data, 'date_published') %}
+	<dateIssued encoding="w3cdtf" keyDate="yes" qualifier="questionable">{{ data.date_published|trim('?') }}</dateIssued>
+{% endif %}
+{% if 'circa' in attribute(data, 'date_published') %}
+	<dateIssued encoding="w3cdtf" keyDate="yes" qualifier="approximate">{{ data.date_published|trim('circa') }}</dateIssued>
+{% endif %}
+{% if '[' in attribute(data, 'date_published') %}
+	<dateIssued encoding="w3cdtf" keyDate="yes" qualifier="inferred">{{ data.date_published|trim('[' and ']') }}</dateIssued>
+{% endif %}    
+{% if attribute(data, 'date_copyright') %}
+	<publisher type="text">{{ data.date_copyright|trim }}</publisher>
+{% endif %} 
+
+{% if attribute(data, 'date_none') %}
+	<publisher type="text">{{ data.date_none|trim }}</publisher>
+{% endif %} 
+
+{% if attribute(data, 'publisher_name') %}
+      <publisher type="text">{{ data.publisher_name|trim }}</publisher>
+{% endif %} 
+{% if attribute(data, 'publisher_location') %}
+	<publisher type="text">{{ data.publisher_location|trim }}</publisher>
+{% endif %} 
+</originInfo>
+{% endif %} 	
+
+{% if attribute(data, 'abstract') %}
+<abstract>{{ data.abstract|trim|escape }}</abstract>
+{% endif %} 
+
+{% if attribute(data, 'note') %}
+<note>{{ data.note|trim|escape }}</note>
+{% endif %} 
+
+{% if attribute(data, 'note_funding') %}
+	<note type="funding">{{ data.note_funding|trim|escape }}</note>
+{% endif %} 
+
+{% if attribute(data, 'note_embargo') %}
+	<note type="embargo">{{ data.note_embargo|trim|escape }}</note>
+{% endif %} 
+
+{% if attribute(data, 'note_thesis') %}
+	<note type="funding">{{ data.note_funding|trim|escape }}</note>
+{% endif %} 
+
+{% if attribute(data, 'type') %}
+{% for type in attribute(data, 'type')|split (';') %}
+<typeOfResource>{{ type|trim|lower }}</typeOfResource>
+{% endfor %}
+{% endif %} 
+  
+{% if attribute(data, 'physdesc_form') or attribute(data, 'digital_origin') or attribute(data, 'mime_type') %}
+<physicalDescription>
+	<form>{{ data.physdesc_form|trim }}</form> 
+    <digitalOrigin>{{ data.digital_origin|trim|lower }}</digitalOrigin>
+	<internetMediaType>{{ data.mime_type|trim|lower }}</internetMediaType>
+</physicalDescription>
+{% endif %} 
+
+{% if attribute(data, 'language') %}
+{% for language in attribute(data, 'language')|split (';') %}
+<language>
+	<languageTerm type="code" authority="iso639-2b">{{ language|trim|lower }}</languageTerm>
+</language>
+{% endfor %}
+{% endif %} 
+
+{% if attribute(data, 'identifier_hdl') %}
+	<identifier type="hdl">{{ data.identifier_hdl|trim|escape }}</identifier>
+{% endif %} 
+
+{% if attribute(data, 'identifier_isbn') %}
+	<identifier type="isbn">{{  data.identifier_isbn|trim|escape }}</identifier>
+{% endif %} 
+
+{% if attribute(data, 'identifier_issn') %}
+	<identifier type="issn">{{  data.identifier_issn|trim|escape }}</identifier>
+{% endif %} 
+
+{% if attribute(data, 'identifier_pn') %}
+	<identifier type="pn">{{ data.identifier_pn|trim|escape }}</identifier>
+{% endif %} 
+
+
+
+{% if attribute(data, 'identifier_other') %}
+	<identifier type="local">{{  data.identifier_other|trim|escape }}</identifier>
+{% endif %} 
+
+{% if attribute(data, 'identifier_none') %}
+	<identifier type="local">{{  data.identifier_none|trim|escape }}</identifier>
+{% endif %} 
+	
+
+{% if attribute(data, 'related_resource') %}
+<relatedItem>
+	<identifier type="otherFormat">{{ data.related_resource|trim|escape }}</identifier>
+</relatedItem>
+{% endif %} 
+
+{% if attribute(data, 'creativecommons') %}
+	<accessCondition type='useAndReproduction' displayLabel='cc'>{{ data.creativecommons|trim|escape }}</accessCondition>
+{% endif %} 
+
+{% if attribute(data, 'creativecommons_uri') %}
+	<accessCondition type="useAndReproduction" displayLabel="ccURI">{{ data.creativecommons_uri|trim|escape }}</accessCondition>
+{% endif %} 
+
+{% if attribute(data, 'rightsstatements') %}
+	<accessCondition type='useAndReproduction' displayLabel='rightsstatements.org'>{{ data.rightsstatements|trim|escape }}</accessCondition>
+{% endif %} 
+	
+{% if attribute(data, 'rightsstatements_uri') %}
+	<accessCondition type='useAndReproduction' displayLabel='rightsstatements.orgURI'>{{ data.rightsstatements_uri|trim|escape }}</accessCondition>
+{% endif %}
+
+{% if attribute(data, 'access_restriction') %}
+	<accessCondition type='restrictionOnAccess'>{{ data.access_restriction|trim|escape }}</accessCondition>
+{% endif %}
+
+{% if attribute(data, 'part_of') %}
+	<relatedItem type="host" displayLabel="Collection">
+		<titleInfo>
+			<title>{{ data.part_of|trim|escape }}</title>
+		</titleInfo>
+	</relatedItem>
+{% endif %} 
+
+<recordInfo>
+	<languageOfCataloging>
+		<languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+    </languageOfCataloging>
+</recordInfo>
+</mods>
+{% endautoescape %}
+{% endblock %}

@@ -1,0 +1,1 @@
+http://repository.iit.edu:8983/solr/islandora/select?q=RELS_EXT_hasModel_uri_s%3A%22info%3Afedora%2Fislandora%3AcompoundCModel%22&fl=PID%2C+mods_identifier_hdl_s&wt=json&indent=true

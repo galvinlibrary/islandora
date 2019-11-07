@@ -1,0 +1,4 @@
+mods_titleInfo_title_s, mods_name_creator_namePart_ss, mods_identifier_hdl_ms, mods_name_corporate_namePart_ss, dc.date, mods_typeOfResource_s, mods_subject_topic_ms
+
+
+RELS_EXT_isMemberOfCollection_uri_mt:"info:fedora/islandora:etds" && dc.date:"2019"

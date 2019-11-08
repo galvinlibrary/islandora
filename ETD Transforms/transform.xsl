@@ -20,6 +20,12 @@
             <accessCondition type="useAndReproduction" displayLabel="rightsstatements.org">In Copyright</accessCondition>
             <accessCondition type="useAndReproduction" displayLabel="rightsstatements.orgURI">http://rightsstatements.org/page/InC/1.0/</accessCondition>
             <accessCondition type="restrictionOnAccess">Restricted Access</accessCondition>
+                <xsl:if test="@embargo_code != '0'">
+                    <note type="embargo">
+                        <xsl:text>Embargo Until: </xsl:text>
+                        <xsl:value-of select="DISS_restriction/DISS_sales_restriction/@remove"/>
+                    </note>
+                </xsl:if>    
         </mods>
     </xsl:template>
     
@@ -72,8 +78,12 @@
         <originInfo>
             <dateCreated keyDate="yes">
                 <xsl:value-of select="."/>
-            </dateCreated>
+            </dateCreated>           
         </originInfo>
+        <note displayLabel="Degree Awarded">
+            <xsl:text>Summer </xsl:text>
+            <xsl:value-of select="."/>
+        </note>
     </xsl:template>
     
     <xsl:template match="DISS_language">
@@ -98,6 +108,16 @@
                 <xsl:value-of select="."/>
             </topic>
         </subject>        
+    </xsl:template>
+    
+    <xsl:template match="DISS_keyword">
+        <xsl:for-each select="tokenize(text(), ',')">
+            <subject>
+                <topic>
+                    <xsl:value-of select="normalize-space(.)"/>
+                </topic>
+            </subject>
+        </xsl:for-each>    
     </xsl:template>
     
     <!-- need to normalize deparments so there's a long if/case statement below -->
@@ -198,6 +218,12 @@
         <xsl:if test="text()='Psychology'">
             <name type="corporate">
                 <namePart>PSYC / Psychology</namePart>
+            </name>
+        </xsl:if>
+        
+        <xsl:if test="contains(text(), 'Science Education')">
+            <name type="corporate">
+                <namePart>MSeD / Mathematics and Science Education</namePart>
             </name>
         </xsl:if>
         

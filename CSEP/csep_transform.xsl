@@ -8,12 +8,12 @@
     <xsl:output indent="yes"/>
     
     <xsl:template match="records">
-       <xsl:for-each-group select="*" group-starting-with="record">
-           <new_doc>
-               <xsl:copy-of select="current-group()"/>
-           </new_doc>
-       </xsl:for-each-group>
-        
+        <xsl:for-each select="record">
+            <xsl:variable name="fn" select="rec-number"/>
+            <xsl:result-document href="file_{$fn}.xml">
+                <xsl:copy-of select="current()"></xsl:copy-of>
+            </xsl:result-document>
+        </xsl:for-each>
     </xsl:template>
-    
+        
 </xsl:stylesheet>

@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TechNews xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>1</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Greetings to "The News"</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Opinion</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper; University President</TechTags>
+		<People>Raymond, Howard M.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>2</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Initiations, Pledges Mark Activities of Many Fraternities</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Fraternities; Beta Psi Fraternity; Triangle Fraternity; Sigma Kappa Delta Fraternity; Phi Pi Phi Fraternity; Rho Delta Rho Fraternity; Honor Societies; Tau Beta Pi Honor Society; Eta Kappa Nu Honor Society; Salamander Honor Society; Chi Epsilon Honor Society</TechTags>
+		<People>Breh, W. C.; Deering, W. B.; Goranson, Harvey E.; Mullins, H. W.; Stevenson, R. H.; Rasmussen, Fred; Westenberg, Gene; Bliss, William; Eddy, Richard; Timmerman, Ralph; Troy, Harold; Bernhard, L. F.; Christiansen, C. H.; Hommes, John; Horn, W. M.; Juergensen, F. H.; Lutz, H. R.; Stabovitz, H. A.; Theede, F. C.; Dozois, H. H.; Ewing, N. S.; Meyer, A. C.; Peterson, V. A.; Berger, I. M.; Boshes, M.; Fidelman, L.; Kaynor, H.; Moskovitz, M.; Nissen, H.; Montgomery, G.; Stellar, R.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>3</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Faculty Members Enthusiastic Over New Publication</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+		<People>Penn, John C.; Schommer, John</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>4</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>New Publication at Armour Tech Makes Its Debut; "News" To Become A Weekly Next Semester; Prof. Hendricks Advisor</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper; Executive Council of Armour Institute; Student Yearbook; The Cycle; Chapin Hall</TechTags>
+		<People>Hendricks, Walter; Zenner, Walter J.; Payne, Frederick D.; Kapke, Elmer B.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>5</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Second Issue of News Is Scheduled For April 20</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>6</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Mid-Semester "Valentine" Ready For Distribution</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Academics</Realm>
+		<Keywords>Failure Notices</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>7</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Armour Branch of W.S.E. Announces Spring Smoker</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Delta Tau Delta Fraternity</TechTags>
+		<Keywords>Western Society of Engineers</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>8</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Dr. Raymond Takes First Two News Subscriptions</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper; University President</TechTags>
+		<People>Raymond, Howard M.; Hendricks, Walter; Kapke, Elmer B.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>9</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>School Calendar</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Calendar/Schedule</ArticleType>
+		<Realm>Activities</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>10</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>1</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Juniors to Run Boiler Test</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Academics</Realm>
+		<Keywords>Lasker Boiler</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>11</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>We Make Our Bow</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Opinion</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>12</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>An Acknowledgment</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Opinion</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+		<People>Hendricks, Walter</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>13</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Vol. 1., No. 1.</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>14</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Are You Reading This Over A Friend's Shoulder?</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>15</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>News Subs Number Encouraging Total</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Student Newspaper</TechTags>
+		<People>Kapke, Elmer B.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>16</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Milwaukee Destination Of Senior E.E.'S M.E.'S</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Academics</Realm>
+		<Location>Milwaukee, Wisconsin</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>17</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Sprig Ab Here- Beautiful Sprig</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Opinion</ArticleType>
+		<Realm>News</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>18</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Sphinx Smoker Tonight At S. K. D. House</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Sphinx Fraternity; Sigma Kappa Delta Fraternity; The Cycle; The Engineer; Student Yearbook</TechTags>
+		<Location>Sigma Kappa Delta Fraternity House</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>19</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Bernhard Chosen Coming Editor Of "Engineer"</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Gas Engine Laboratory</TechTags>
+		<Keywords>City of Chicago Electrical Department; Automatic Traffic Signals; Society of Automotive Engineers</Keywords>
+		<People>Bernhard, L. F.; Brown, L. P.; Schaffer, C. S.; Roesch, Daniel</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>20</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Honorary Fraternity Dance Announced For Friday 27</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Activities</Realm>
+		<TechTags>Honorary Fraternity Dance; The Armour Engineer</TechTags>
+		<Keywords>Allerton Club Orchestra</Keywords>
+		<Location>Allerton Club</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>21</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>The Slipstick</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Column</ArticleType>
+		<ArticleFrequency>Regular Column</ArticleFrequency>
+		<Realm>Whimsy</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>22</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Good Grief ! Clarence</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Opinion</ArticleType>
+		<Realm>Activities</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>23</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>A Day Awheel</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Whimsy</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>24</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>April Fool</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Whimsy</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>25</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>2</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Armour News</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Masthead</ArticleType>
+		<ArticleFrequency>Regular Column</ArticleFrequency>
+		<Realm>Activities</Realm>
+		<TechTags>Armour News [Student Newspaper]</TechTags>
+		<People>Hommes, John; Smith, David T.; Hendricks, Walter; Payne, Frederick D.; Besch, Otto R.; Eichin, Harry P.; Even, John T.; Zenner, Walter J.; Anderson, C. G.; Auerbach, A.; Bechtold, J. A.; Boynton, E. P.; Coleman, M.; Dozois, H. H.; Dusberger, L. C.; Edstrand, J. P.; Farrell, F. B.; Garen, D. G.; Gibson, G. A.; Goranson, Harvey E.; Hindman, B. W.; Johnson, Russell E.; Katz, I. G.; Kramer, John W.; Kilbourne, R.; Morris, C. E.; Montgomery, H. W.; Olson, C.; Paradzinski, W.; Parker, Kent H.; Pulaski, S. S.; Ross, E. B.; Russukov, S. F.; Shabino, C. L.; Short, E. W.; Sitzler, J. G.; Smith, G. H.; Spalding, F. W.; Stabovitz, A. J.; Stellar, R. F.; Tarman, J. E.; Timmerman, Ralph; Urmston, D.; Von Gehr, G. H.; Kapke, Elmer B.; Rambolt, Charles L.; Nelson, Morris; Beatty, Stanley A.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>26</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Underwriters' Lab Awarded Morehead Acetylene Medal</ArticleTitle>
+		<Scope>National</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Technology</Realm>
+		<Keywords>James Turner Morehead Medal; Underwriter's Laboratories; International Acetylene Association; Tiffany Company; New York, New York</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>27</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Tomorrow Is Dead-Line On Orders Of Grad Bids</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Academics</Realm>
+		<TechTags>Graduation Ceremony</TechTags>
+		<Keywords>E. A. Wright Company</Keywords>
+		<People>Willis, Ernest; Gustafson, C.; Krieger, Harry; Cottington, N.</People>
+		<Location>Philadelphia, Pensylvania</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>28</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Rifle Club First Team Wins Inter-Tourney</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Rifle Club</TechTags>
+		<People>Pulaski, S.; Janiszewski, O. S.; Statkus, L.; Montgomery, H.; Kerr, W.; Farrell, F.; Jacobson, J.; Martin, A.; Pore, W.; Garen, D.; Mironowicz, V.; Young, R.; Kuta, G.; Ericsson, L.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>29</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Sophomore Girls Whip Juniors; Score 26-20</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Ogden Field</TechTags>
+		<Keywords>Baseball</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>30</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Dr. Raymond Motors To Grass Lake Mich., To Spend Easter</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Announcement</ArticleType>
+		<Realm>Academics</Realm>
+		<TechTags>University President</TechTags>
+		<People>Raymond, Howard M.</People>
+		<Location>Grass Lake, Michigan</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>31</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Sr. Arch Wins Beaux Arts First Award</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>News</Realm>
+		<Keywords>Beaux Arts Project Competition</Keywords>
+		<People>Samuelson, T. E.; Bieg, H. K.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>32</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Lombard To Bellwood Was Hiking Club's Tramp</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Hiking Club</TechTags>
+		<People>Spalding, F. W.; Pulaski, S. S.</People>
+		<Location>Lombard, Illinois; Bellwood, Illinois; Starved Rock; Indiana Dunes</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>33</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Purdue U. Scriveners Found New Magazine</ArticleTitle>
+		<Scope>Regional</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>News</Realm>
+		<TechTags>Rho Delta Rho Fraternity; Beta Psi Fraternity</TechTags>
+		<Location>Purdue University; Belmont Hotel; Stevens Hotel</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>34</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Phi Pi Phi In The A. A. F.</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Phi Pi Phi Fraternity</TechTags>
+		<Keywords>Amateur Athletic Federation; Basketball</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>35</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Prof. Griffith Invents Concrete Design Charts</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Technology</Realm>
+		<Keywords>Concrete Magazine; Reinforced Concrete Design Simplified</Keywords>
+		<People>Griffith, James R.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>36</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Schommer To Be Busy As Referee Next Fall</ArticleTitle>
+		<Scope>Regional</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Sports</Realm>
+		<Keywords>Football</Keywords>
+		<People>Schommer, John</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>37</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Armour Represented By Dean Penn At Cleveland Conclave</ArticleTitle>
+		<Scope>National</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Academics</Realm>
+		<TechTags>Dean of Engineering</TechTags>
+		<Keywords>American Association of Collegiate Registrars</Keywords>
+		<People>Penn, John C.</People>
+		<Location>Cleveland, Ohio</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>38</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Prof. Palmer Writes New College Algebra Text</ArticleTitle>
+		<Scope>National</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>News</Realm>
+		<Keywords>College Algebra</Keywords>
+		<People>Amsbary, Wallace Bruce; Kraft, William C.</People>
+		<Location>Allendale Club; Allerton Hotel</Location>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>39</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>3</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Lagoni Hardware Co.</ArticleTitle>
+		<Scope>Local</Scope>
+		<ArticleType>Advertisement</ArticleType>
+		<Realm>Business</Realm>
+		<Keywords>Lagoni Hardware Company</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>40</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Baseball Call Brings Flock Of 35 Candidates; Eight Are Letter Men Of Last Year's Squad</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Baseball Team; Ogden Field</TechTags>
+		<People>Kraft, William C.</People>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>41</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>1</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Track Team Bows To Crane Tech, 57-37</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+		<TechTags>Track Team</TechTags>
+		<Keywords>Crane Technical Prep High School; Chicago Normal College</Keywords>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>42</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Track Team Enjoys Travel To Urbana</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>43</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>2</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Baseball Schedule 1928</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Calendar/Schedule</ArticleType>
+		<Realm>Sports</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>44</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Four Regulars Back For Work On Tennis Team</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Sports</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>45</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>4</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Trognitz Swims At Phila; Places Sixth</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Event Recap</ArticleType>
+		<Realm>Sports</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>46</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>5</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>M'Gillvray Has Built Team Of Star Natators; Swimmers Paddle Ro Make 500 Average</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Article</ArticleType>
+		<Realm>Sports</Realm>
+	</article>
+	<article>
+		<issueUID>V001N01</issueUID>
+		<ArticleUID>47</ArticleUID>
+		<Status>Online</Status>
+		<VolumeN>1</VolumeN>
+		<IssueNo>1</IssueNo>
+		<PageNo>4</PageNo>
+		<ColumnNo>3</ColumnNo>
+		<Date>10327</Date>
+		<ArticleTitle>Armour Institute Of Technology 33rd And Federal Streets Chicago, Illinois; Summer Session; June 18 T</ArticleTitle>
+		<Scope>University</Scope>
+		<ArticleType>Advertisement</ArticleType>
+		<Realm>Academics</Realm>
+	</article>
+</TechNews>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TechNews>
+    <article>
+        <issueUID></issueUID>
+        <ArticleUID></ArticleUID>
+        <Status></Status>
+        <VolumeN></VolumeN>
+        <IssueNo></IssueNo>
+        <IssueNotes></IssueNotes>
+        <SpecialEdition></SpecialEdition>
+        <PageNo></PageNo>
+        <ColumnNo></ColumnNo>
+        <Date></Date>
+        <ArticleTitle></ArticleTitle>
+        <ArticleAuthor></ArticleAuthor>
+        <Scope></Scope>
+        <ArticleType></ArticleType>
+        <ArticleFrequency></ArticleFrequency>
+        <Realm></Realm>
+        <TechTags></TechTags>
+        <Keywords></Keywords>
+        <People></People>
+        <Location></Location>
+    </article>
+    <article>
+       <issueUID></issueUID>
+       <ArticleUID></ArticleUID>
+       <Status></Status>
+       <VolumeN></VolumeN>
+       <IssueNo></IssueNo>
+       <IssueNotes></IssueNotes>
+       <SpecialEdition></SpecialEdition>
+       <PageNo></PageNo>
+       <ColumnNo></ColumnNo>
+       <Date></Date>
+       <ArticleTitle></ArticleTitle>
+       <ArticleAuthor></ArticleAuthor>
+       <Scope></Scope>
+       <ArticleType></ArticleType>
+       <ArticleFrequency></ArticleFrequency>
+       <Realm></Realm>
+       <TechTags></TechTags>
+       <Keywords></Keywords>
+       <People></People>
+       <Location></Location>
+    </article>        
+</TechNews>

@@ -54,10 +54,16 @@ for root, dirs, files in os.walk(new_dir):
 # Rename Files                    
 for root, dirs, files in os.walk(final_dir):
     for f in files:
+        if f.endswith('.tif'):
+            new_name = "OBJ.tif"
+            print(new_name)
+            os.rename(root + "\\" + f, root + "\\" + new_name)
         #print(root + "\\" + f)
-        new_name = (f[-3:])
-        #print(root + "\\" + new_name + "." + new_name)
-        os.rename(root + "\\" + f, root + "\\" + new_name + "." + new_name)
+        else:
+            new_name = (f[-3:])
+            #print(root + "\\" + new_name.upper() + "." + new_name)
+            os.rename(root + "\\" + f, root + "\\" + new_name.upper() + "." + new_name)
+        #os.rename(root + "\\" + f, root + "\\" + new_name + "." + new_name)
         
         
 # Move XML
@@ -65,4 +71,4 @@ for root, dirs, files in os.walk(home_dir):
     for f in files:
         #print(f)
         #print(final_dir + f[:-4] + "\\" + f)
-        shutil.move(home_dir + f, final_dir + f[:-4] + "\\" + f)
+        shutil.move(home_dir + f, final_dir + f[:-4] + "\\MODS.xml")

@@ -1,8 +1,8 @@
 import csv
 
-my_file = "C:\\Users\\tfluhr\\Desktop\\handle_migration\\full_test.csv"
+my_file = "C:\\path_to_file.csv"
 base_url = "1 URL 86400 1110 UTF8 https://beta.repository.library.iit.edu/islandora/object/"
-out_file = open("C:\\Users\\tfluhr\\Desktop\\handle_migration\\outfile.txt", "w")
+out_file = open("C:\\path_to_log.txt", "w")
 
 with open(my_file) as csvfile:
     readCSV = csv.reader(csvfile)

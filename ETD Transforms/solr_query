@@ -2,3 +2,6 @@ mods_titleInfo_title_s, mods_name_creator_namePart_ss, mods_identifier_hdl_ms, m
 
 
 RELS_EXT_isMemberOfCollection_uri_mt:"info:fedora/islandora:etds" && dc.date:"2019"
+
+
+http://repository.iit.edu:8983/solr/islandora/select?q=RELS_EXT_isMemberOfCollection_uri_mt%3A%22info%3Afedora%2Fislandora%3Aetds%22+%26%26+mods_note_s%3A%22Fall+2019%22&rows=100&fl=mods_titleInfo_title_s%2C+mods_name_creator_namePart_ss%2C+mods_identifier_hdl_ms%2C+mods_name_corporate_namePart_ss%2C+dc.date%2C+mods_typeOfResource_s%2C+mods_subject_topic_ms&wt=csv&indent=true
